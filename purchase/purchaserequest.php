@@ -10,7 +10,57 @@ if (!$conn) {
     echo "Connection successful";
 
 }
+
+if (strlen($_SESSION['login']) == "") {
+    header('location:index.php');
+} else {
+
+    if (isset($_POST['submit'])) {
+
+        // $uid = $_SESSION['id'];
+        // $id = $_POST['id'];
+        $name = $_POST['name'];
+        $state = $_POST['state'];
+        $location = $_POST['location'];
+        $place = $_POST['place'];
+        $product = $POST['product'];
+        $qty = $_POST['qty'];
+        $vendor = $_POST['vendor'];
+
+
+
+        //$reqfile = $_FILES["reqfile"]["name"];
+
+        //move_uploaded_file($_FILES["reqfile"]["tmp_name"], "reqdocs/" . $_FILES["reqfile"]["name"]);
+        $sql = "INSERT INTO purchaserequest ( `name`,`state`,`location`,`place`,`product`,`qty`,`vendor`) VALUES 
+
+        ('$name','$state','$location','$place','$product','$qty','$vendor')";
+
+        // echo $sql;
+
+        if (mysqli_query($conn, $sql)) {
+            echo "New record created successfully";
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
+
+        // $query=mysqli_query($con,"insert into tblrequirements (userId,category,subcategory,requirementsType,state,requirementsDetails,reqfile) values('$uid','$category','$subcat','$complaintype','$state','$complaintdetials','$reqfile','$locations')")
+
+        //echo "INSERT INTO vendorlist (`userId`,`vendorname`,`contactperson `,`gstnumber`,`pannumber`,`email`,`accountnumber`, `ifsccode `,`address` , `department`,`state, `place `) VALUES ('$uid','$vendorname','$contactperson','$gstnumber`,'$pannumber','$email','$accountnumber','$ifsccode ','$address','$department','$state ','$place')";
+    }
+
+
+}
+
+
+
+
+
 ?>
+
+
+
+
 
 
 
@@ -101,7 +151,7 @@ if (!$conn) {
                 <div class="">
                     <div>
                         <label for="fname" class="block mb-2 text-sm font-medium text-gray-900 ">Applicant Name</label>
-                        <input type="text" id="fname" name="Applicant Name"
+                        <input type="text" id="fname" name="name"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
                             placeholder="John" required>
                     </div>
@@ -125,9 +175,10 @@ if (!$conn) {
                             <label for="state" class="block mb-2 text-sm font-medium text-gray-900 ">State
 
                             </label>
-                            <select name="country-list" id="country-list" onChange="getState(this.value);"
+                            <select name="state" id="country-list" onChange="getState(this.value);"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 ">
-                                <option value="">Select Country</option>
+                                <option value="">Select State
+                                </option>
                                 <?php
 
                                 $countryResult = mysqli_query($conn, "select country_name from country");
@@ -151,14 +202,22 @@ if (!$conn) {
 
                     <div class='mb-6'>
 
-                        <label for="state-list" class="block mb-2 text-sm font-medium text-gray-900 ">Location
+                        <label for="location" class="block mb-2 text-sm font-medium text-gray-900 ">Location
 
                         </label>
-                        <select name="state" id="state-list"
+                        <select name="location" id="location"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 ">
-                            <option value="">Select State</option>
+                            <option value="">Select Location</option>
 
+                            <option value="Chennai">
+                                Chennai</option>
+                            <option value="Bangalore">
+                                Bangalore</option>
+                            <option value="Hyderabad">
+                                Hyderabad</option>
 
+                            <option value="Cochin">
+                                Cochin</option>
 
                         </select>
 
@@ -168,10 +227,10 @@ if (!$conn) {
 
                     <div class='mb-6'>
 
-                        <label for="location" class="block mb-2 text-sm font-medium text-gray-900 ">Place
+                        <label for="place" class="block mb-2 text-sm font-medium text-gray-900 ">Place
 
                         </label>
-                        <select name="location"
+                        <select name="place" id="place"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 ">
                             <option value=" ">Choose a Place</option>
                             <option value="Chennai">
@@ -201,25 +260,25 @@ if (!$conn) {
             <div class="grid gap-6 mb-6 lg:grid-cols-3 rounded-2xl">
 
                 <div>
-                    <label for="product-decription" class="block mb-2 text-sm font-medium text-gray-900 ">
+                    <label for="product" class="block mb-2 text-sm font-medium text-gray-900 ">
                         Product-Description</label>
-                    <input type="product-decription" id="product-decription" name="product-decription"
+                    <input type="text" id="product" name="product"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
                         placeholder="Product_Description" required>
                 </div>
                 <div>
-                    <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 ">Qty
+                    <label for="qty" class="block mb-2 text-sm font-medium text-gray-900 ">Qty
                     </label>
 
-                    <input type="number" id="qty" name="quantity"
+                    <input type="number" id="qty" name="qty"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
                         placeholder="123-45-678" required>
                 </div>
                 <div>
-                    <label for="vendorlist" class="block mb-2 text-sm font-medium text-gray-900 ">Vendor List
+                    <label for="vendor" class="block mb-2 text-sm font-medium text-gray-900 ">Vendor List
                     </label>
 
-                    <select name="place"
+                    <select name="vendor"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 ">
                         <option value="">Select Vendor</option>
 
@@ -236,7 +295,7 @@ if (!$conn) {
                         ?>
 
 
-                        <select name="state" required="required" class="form-control" value="<?php'$vendorname' ?>">
+                        <select name="state" required="required" value="<?php'$vendorname' ?>">
 
 
 
@@ -251,7 +310,7 @@ if (!$conn) {
 
 
 
-            <div class="mb-6">
+            <!-- <div class="mb-6">
                 <label for="bank" class="block mb-2 text-sm font-medium text-gray-900 ">Bank
                     Account
                     Number
@@ -275,10 +334,10 @@ if (!$conn) {
                 <input type="text" id="address" name="address"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
                     placeholder="Enter Address " required>
-            </div>
+            </div> -->
 
 
-            <div class='mb-6'>
+            <!-- <div class='mb-6'>
 
                 <label for="department" class="block mb-2 text-sm font-medium text-gray-900 ">Department
 
@@ -301,8 +360,8 @@ if (!$conn) {
 
 
 
-            </div>
-            <div class='mb-6'>
+            </div> -->
+            <!-- <div class='mb-6'>
 
                 <label for="state" class="block mb-2 text-sm font-medium text-gray-900 ">State
 
@@ -326,10 +385,10 @@ if (!$conn) {
                 </select>
 
 
-            </div>
+            </div> -->
 
 
-
+            <!-- 
             <div class='mb-6'>
 
                 <label for="location" class="block mb-2 text-sm font-medium text-gray-900 ">Location
@@ -353,8 +412,8 @@ if (!$conn) {
                 </select>
 
 
-            </div>
-            <div class='mb-6'>
+            </div> -->
+            <!-- <div class='mb-6'>
 
                 <label for="place" class="block mb-2 text-sm font-medium text-gray-900 ">Place
 
@@ -377,7 +436,7 @@ if (!$conn) {
                 </select>
 
 
-            </div>
+            </div> -->
 
 
 
