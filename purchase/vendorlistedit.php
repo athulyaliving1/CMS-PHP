@@ -2,12 +2,43 @@
 session_start();
 error_reporting(1);
 include('includes/config.php');
-if (strlen($_SESSION['login']) == "") {
-    header('location:index.php');
+$conn = mysqli_connect('localhost', 'root', '', 'athul9z1_cms');
+// Check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
 } else {
+    echo "Connection successful";
 
-    if (isset($_POST['submit'])) {
-        $vendorname = $_SESSION['vendorname'];
+}
+
+if (isset($_POST['update'])) {
+    $vendorname = $_POST['vendorname'];
+    $contactperson = $_POST['contactperson'];
+    $gstnumber = $_POST['gstnumber'];
+    $pannumber = $_POST['pannumber'];
+    $email = $_POST['email'];
+    $mobilenumber = $_POST['mobilenumber'];
+    $accountnumber = $_POST['accountnumber'];
+    $ifsccode = $_POST['ifsccode'];
+    $address = $_POST['address'];
+    $department = $_POST['department'];
+    $state = $_POST['state'];
+    $location = $_POST['location'];
+    $place = $_POST['place'];
+    $result = mysqli_query($conn, "UPDATE vendorlist SET `vendorname='$vendorname',`contactperson`='$contactperson',`gstnumber`='$gstnumber',`pannumber`='$pannumber',`email`='$email',`mobilenumber`='$mobilenumber'  ,`accountnumber`='$accountnumber'  ,`ifsccode`='$ifsccode' ,`address`='$address'  ,`department`='$department' ,`state`='$state' ,`location`='$location',`place`='$place' WHERE id=$id");
+    header("Location: index.php");
+}
+
+
+if (isset($_GET['edit'])) {
+    $id = $_GET['edit'];
+    $update = true;
+    $record = mysqli_query($conn, "SELECT * FROM vendorlist WHERE id=$id");
+
+
+    if (count($record) == 1) {
+        $n = mysqli_fetch_array($record);
+        $vendorname = $_POST['vendorname'];
         $contactperson = $_POST['contactperson'];
         $gstnumber = $_POST['gstnumber'];
         $pannumber = $_POST['pannumber'];
@@ -15,18 +46,14 @@ if (strlen($_SESSION['login']) == "") {
         $mobilenumber = $_POST['mobilenumber'];
         $accountnumber = $_POST['accountnumber'];
         $ifsccode = $_POST['ifsccode'];
-        $vendor = $_POST['vendor'];
-
-
-        $reqfile = $_FILES["reqfile"]["name"];
-
-        move_uploaded_file($_FILES["reqfile"]["tmp_name"], "reqdocs/" . $_FILES["reqfile"]["name"]);
-
-
-        $query = mysqli_query($con, "INSERT INTO `purchaseregistration  ` (`reqNumber`,`userId`,`category`,`subcategory`,`pannumber`,   `email`,`accountnumber`, ``  `place`,`vendor`) VALUES (5556,555,4,'Browser','Non-Emergency','MARKETING','test requirements',1);");
-
-
+        $address = $_POST['address'];
+        $department = $_POST['department'];
+        $state = $_POST['state'];
+        $location = $_POST['location'];
+        $place = $_POST['place'];
     }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -54,7 +81,7 @@ if (strlen($_SESSION['login']) == "") {
                         sans: ['Inter', 'sans-serif'],
                     },
                 }
-                screens: {
+                                                                                                                                                                                                                                                    screens: {
                     ss: "320px",
                     // => @media (min-width: 640px) { ... }
 
@@ -74,7 +101,7 @@ if (strlen($_SESSION['login']) == "") {
                     // => @media (min-width: 1536px) { ... }
                 },
             }
-            container: {
+                                                                                                                                                                                                                                                container: {
                 padding: {
                     DEFAULT: "1rem",
                     sm: "2rem",
@@ -115,34 +142,30 @@ if (strlen($_SESSION['login']) == "") {
     <div class="bg-gray-300 w-full h-full p-10">
         <div class="max-w-2xl mx-auto bg-white  p-16">
 
-            <form>
+            <form action="" method="post">
                 <div class="grid gap-6 mb-6 lg:grid-cols-2 rounded-2xl">
                     <div>
-                        <label for="fname"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Vendor name</label>
-                        <input type="text" id="fname" name="vendorname "
+                        <label for="fname" class="block mb-2 text-sm font-medium text-gray-900 ">Vendor name</label>
+                        <input type="text" id="fname" name="vendorname"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
                             placeholder="John" required>
                     </div>
                     <div>
-                        <label for="cname"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Contact
+                        <label for="cname" class="block mb-2 text-sm font-medium text-gray-900 ">Contact
                             Person</label>
                         <input type="text" id="cname" name="contactperson"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
                             placeholder="Doe" required>
                     </div>
                     <div>
-                        <label for="gstnumber"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">GST-NO
+                        <label for="gstnumber" class="block mb-2 text-sm font-medium text-gray-900 ">GST-NO
                         </label>
                         <input type="number" id="gstnumber" name="gstnumber"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
                             placeholder="123-45-678" required>
                     </div>
                     <div>
-                        <label for="pannumber"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">PAN
+                        <label for="pannumber" class="block mb-2 text-sm font-medium text-gray-900 ">PAN
                             Number
                         </label>
                         <input type="tel" id="pannumber" name="pannumber"
@@ -150,15 +173,14 @@ if (strlen($_SESSION['login']) == "") {
                             placeholder="123-45-678" required>
                     </div>
                     <div>
-                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email
+                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 ">Email
                             Address</label>
                         <input type="email" id="email" name="email"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
                             placeholder="john.doe@company.com" required>
                     </div>
                     <div>
-                        <label for="phone"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Mobile
+                        <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 ">Mobile
                             Number
                         </label>
 
@@ -168,7 +190,7 @@ if (strlen($_SESSION['login']) == "") {
                     </div>
                 </div>
                 <div class="mb-6">
-                    <label for="bank" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Bank
+                    <label for="bank" class="block mb-2 text-sm font-medium text-gray-900 ">Bank
                         Account
                         Number
                     </label>
@@ -177,7 +199,7 @@ if (strlen($_SESSION['login']) == "") {
                         placeholder="Account Number" required>
                 </div>
                 <div class="mb-6">
-                    <label for="bank" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">IFSC Code
+                    <label for="bank" class="block mb-2 text-sm font-medium text-gray-900 ">IFSC Code
 
                     </label>
                     <input type="text" id="ifsccode" name="ifsccode"
@@ -185,7 +207,7 @@ if (strlen($_SESSION['login']) == "") {
                         placeholder="Enter IFSC Code" required>
                 </div>
                 <div class="mb-6">
-                    <label for="bank" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Address
+                    <label for="bank" class="block mb-2 text-sm font-medium text-gray-900 ">Address
 
                     </label>
                     <input type="text" id="address" name="address"
@@ -196,13 +218,22 @@ if (strlen($_SESSION['login']) == "") {
 
                 <div class='mb-6'>
 
-                    <label for="bank" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Department
+                    <label for="department" class="block mb-2 text-sm font-medium text-gray-900 ">Department
 
                     </label>
-                    <select
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 ">
-                        <option selected>Choose a Location</option>
+                    <select name="department"
+                        class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm
+                                                                                                                    rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 ">
+                        <option selected>Choose a Department</option>
+                        <option value=" Tamil Nadu">
+                            Tamil Nadu</option>
 
+                        <option value="Karnataka">
+                            Karnataka
+                        </option>
+                        <option value="Kerala">
+                            Kerala
+                        </option>
                     </select>
 
 
@@ -211,10 +242,10 @@ if (strlen($_SESSION['login']) == "") {
                 </div>
                 <div class='mb-6'>
 
-                    <label for="bank" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">State
+                    <label for="state" class="block mb-2 text-sm font-medium text-gray-900 ">State
 
                     </label>
-                    <select
+                    <select name="state"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
                         required>
                         <option selected>Choose a State</option>
@@ -239,10 +270,10 @@ if (strlen($_SESSION['login']) == "") {
 
                 <div class='mb-6'>
 
-                    <label for="bank" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Location
+                    <label for="location" class="block mb-2 text-sm font-medium text-gray-900 ">Location
 
                     </label>
-                    <select
+                    <select name="location"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 ">
                         <option selected>Choose a Location</option>
                         <option value="Chennai">
@@ -263,12 +294,12 @@ if (strlen($_SESSION['login']) == "") {
                 </div>
                 <div class='mb-6'>
 
-                    <label for="bank" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Place
+                    <label for="place" class="block mb-2 text-sm font-medium text-gray-900 ">Place
 
                     </label>
-                    <select
+                    <select name="place"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 ">
-                        <option selected>Choose a Place</option>
+                        <option name="place" selected>Choose a Place</option>
                         <option value="Arumbakkam">
                             Arumbakkam</option>
                         <option value="Perungudi">
@@ -286,10 +317,16 @@ if (strlen($_SESSION['login']) == "") {
 
                 </div>
 
+
+
                 <div class="grid gap-4 place-content-center">
-                    <button type="submit"
-                        class="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-sky-800">Submit</button>
+                    <button type="submit" name="update" value="Update"
+                        class="text-white bg-pink-500 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Save</button>
+
                 </div>
+
+
+
 
             </form>
 
@@ -303,4 +340,4 @@ if (strlen($_SESSION['login']) == "") {
 </body>
 
 </html>
-<?php } ?>
+<?php ?>

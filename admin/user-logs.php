@@ -55,7 +55,7 @@ header('location:index.php');
 <?php $query=mysqli_query($con,"select * from userlog");
 $cnt=1;
 while($row=mysqli_fetch_array($query))
-{
+    {
 ?>									
 										<tr>
 											<td><?php echo htmlentities($cnt);?></td>

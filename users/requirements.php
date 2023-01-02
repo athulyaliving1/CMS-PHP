@@ -2,90 +2,84 @@
 session_start();
 error_reporting(0);
 include('includes/config.php');
-if(strlen($_SESSION['login'])=="")
-  { 
-header('location:index.php');
-}
-else{
+if (strlen($_SESSION['login']) == "") {
+  header('location:index.php');
+} else {
 
-if(isset($_POST['submit']))
-{
-$uid=$_SESSION['id'];
-$category=$_POST['category'];
-$subcat=$_POST['subcategory'];
-$reqtype=$_POST['reqtype'];
-$state=$_POST['state'];
-$reqdetials=$_POST['reqdetails'];
-$locations=$_POST['locations'];
-$reqfile=$_FILES["reqfile"]["name"];
+  if (isset($_POST['submit'])) {
+    $uid = $_SESSION['id'];
+    $category = $_POST['category'];
+    $subcat = $_POST['subcategory'];
+    $reqtype = $_POST['reqtype'];
+    $state = $_POST['state'];
+    $reqdetials = $_POST['reqdetails'];
+    $locations = $_POST['locations'];
+    $reqfile = $_FILES["reqfile"]["name"];
 
-move_uploaded_file($_FILES["reqfile"]["tmp_name"],"reqdocs/".$_FILES["reqfile"]["name"]);
+    move_uploaded_file($_FILES["reqfile"]["tmp_name"], "reqdocs/" . $_FILES["reqfile"]["name"]);
 
 
-$query=mysqli_query($con,"insert into requirements(userId,category,subcategory,reqType,state,reqDetails,locations,reqFile) values('$uid','$category','$subcat','$reqtype','$state','$reqdetials','$locations','$reqfile')");
+    $query = mysqli_query($con, "insert into requirements(userId,category,subcategory,reqType,state,reqDetails,locations,reqFile) values('$uid','$category','$subcat','$reqtype','$state','$reqdetials','$locations','$reqfile')");
 
 
-if($query) {
+    if ($query) {
 
 
 
 
-$sender = $_SESSION['login'];
+      $sender = $_SESSION['login'];
 
-$query1=mysqli_query($con,"select fullName from users where userEmail='".$sender."'");
-while($row=mysqli_fetch_array($query1)) 
- {
+      $query1 = mysqli_query($con, "select fullName from users where userEmail='" . $sender . "'");
+      while ($row = mysqli_fetch_array($query1)) {
 
-$sendername = $row['fullName'];
-}
-$toema = "itteam@healthopinion.net";
+        $sendername = $row['fullName'];
+      }
+      $toema = "itteam@healthopinion.net";
 
-$subjct = "Requirement Form";
-$strHeader = "";
-		$strHeader .= "MIME-Version: 1.0\n";
-		$strHeader .= "Content-type:text/html; charset=iso-8859-1\n";
-		$strHeader .= "From: CMS\r\n";
-$fullmessg = "Hi Team,<br/><br/>
+      $subjct = "Requirement Form";
+      $strHeader = "";
+      $strHeader .= "MIME-Version: 1.0\n";
+      $strHeader .= "Content-type:text/html; charset=iso-8859-1\n";
+      $strHeader .= "From: CMS\r\n";
+      $fullmessg = "Hi Team,<br/><br/>
 		The following details are received from  <b>CMS</b><br/>
-		<br/><b>Name: </b>".$sendername."<br/>
-		<b>Email ID: </b>".$sender."<br/>	
-		<b>Department : </b>".$state."<br/>	
-		<b>Requirement Type : </b>".$reqtype."<br/>
-                 <b>Requirement Details : </b>".$reqdetials."<br/>
-		<br/>Thanks and Regards,<br/>".ucwords($fname)."<br/>
+		<br/><b>Name: </b>" . $sendername . "<br/>
+		<b>Email ID: </b>" . $sender . "<br/>	
+		<b>Department : </b>" . $state . "<br/>	
+		<b>Requirement Type : </b>" . $reqtype . "<br/>
+                 <b>Requirement Details : </b>" . $reqdetials . "<br/>
+		<br/>Thanks and Regards,<br/>" . ucwords($fname) . "<br/>
 		<br/><br/>";
 
 
-mail($toema,$subjct,$fullmessg,$strHeader);
+      mail($toema, $subjct, $fullmessg, $strHeader);
 
-if($sender)
-{
+      if ($sender) {
 
-mail($sender,$subjct,$fullmessg,$strHeader);
+        mail($sender, $subjct, $fullmessg, $strHeader);
 
-}
-// code for show Requirement number
+      }
+      // code for show Requirement number
 
-$sql=mysqli_query($con,"select reqNumber from requirements  order by reqNumber desc limit 1");
-while($row=mysqli_fetch_array($sql))
-{
- $cmpn=$row['reqNumber'];
-}
-$complainno=$cmpn;
-echo '<script> alert("Your Requirement has been successfully filled and your Requirement No is  "+"'.$complainno.'")</script>';
+      $sql = mysqli_query($con, "select reqNumber from requirements  order by reqNumber desc limit 1");
+      while ($row = mysqli_fetch_array($sql)) {
+        $cmpn = $row['reqNumber'];
+      }
+      $complainno = $cmpn;
+      echo '<script> alert("Your Requirement has been successfully filled and your Requirement No is  "+"' . $complainno . '")</script>';
 
-   }
-   else {   
-echo '<script> alert("Oops! Something went wrong try again !")</script>';
+    } else {
+      echo '<script> alert("Oops! Something went wrong try again !")</script>';
 
-   }
+    }
 
 
-}
-?>
+  }
+  ?>
 
-<!DOCTYPE html>
-<html lang="en">
+  <!DOCTYPE html>
+  <html lang="en">
+
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -104,155 +98,162 @@ echo '<script> alert("Oops! Something went wrong try again !")</script>';
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
     <script>
-function getCat(val) {
-  //alert('val');
+      function getCat(val) {
+        //alert('val');
 
-  $.ajax({
-  type: "POST",
-  url: "getsubcat.php",
-  data:'catid='+val,
-  success: function(data){
-    $("#subcategory").html(data);
-    
-  }
-  });
-  }
-  </script>
-  
+        $.ajax({
+          type: "POST",
+          url: "getsubcat.php",
+          data: 'catid=' + val,
+          success: function (data) {
+            $("#subcategory").html(data);
+
+          }
+        });
+      }
+    </script>
+
   </head>
 
   <body>
 
-  <section id="container" >
-     <?php include("includes/header.php");?>
-      <?php include("includes/sidebar.php");?>
+    <section id="container">
+      <?php include("includes/header.php"); ?>
+      <?php include("includes/sidebar.php"); ?>
       <section id="main-content">
-          <section class="wrapper">
-          	<h3><i class="fa fa-angle-right"></i> Register Your Requirements</h3>
-          	
-          	<!-- BASIC FORM ELELEMNTS -->
-          	<div class="row mt">
-          		<div class="col-lg-12">
-                  <div class="form-panel">
-                  	
+        <section class="wrapper">
+          <h3><i class="fa fa-angle-right"></i> Register Your Requirements</h3>
 
-                      <?php if($successmsg)
-                      {?>
-                      <div class="alert alert-success alert-dismissable">
-                       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                      <b>Well done!</b> <?php echo htmlentities($successmsg);?></div>
-                      <?php }?>
-
-   <?php if($errormsg)
-                      {?>
-                      <div class="alert alert-danger alert-dismissable">
- <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                      <b>Oh snap!</b> </b> <?php echo htmlentities($errormsg);?></div>
-                      <?php }?>
-
-                      <form class="form-horizontal style-form" method="post" name="complaint" enctype="multipart/form-data" >
-
-<div class="form-group">
-<label class="col-sm-2 col-sm-2 control-label">Category</label>
-<div class="col-sm-4">
-<select name="category" id="category" class="form-control" onChange="getCat(this.value);" required="">
-<option value="">Select Category</option>
-<?php $sql=mysqli_query($con,"select id,categoryName from category ");
-while ($rw=mysqli_fetch_array($sql)) {
-  ?>
-  <option value="<?php echo htmlentities($rw['id']);?>"><?php echo htmlentities($rw['categoryName']);?></option>
-<?php
-}
-?>
-</select>
- </div>
-<label class="col-sm-2 col-sm-2 control-label">Sub Category </label>
- <div class="col-sm-4">
-<select name="subcategory" id="subcategory" class="form-control" >
-<option value="">Select Subcategory</option>
-</select>
-</div>
- </div>
+          <!-- BASIC FORM ELELEMNTS -->
+          <div class="row mt">
+            <div class="col-lg-12">
+              <div class="form-panel">
 
 
+                <?php if ($successmsg) { ?>
+                  <div class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <b>Well done!</b> <?php echo htmlentities($successmsg); ?>
+                  </div>
+                  <?php } ?>
 
+                <?php if ($errormsg) { ?>
+                  <div class="alert alert-danger alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <b>Oh snap!</b> </b>
+                    <?php echo htmlentities($errormsg); ?>
+                  </div>
+                  <?php } ?>
 
-<div class="form-group">
-<label class="col-sm-2 col-sm-2 control-label">Requirement Type</label>
-<div class="col-sm-4">
-<select name="reqtype" class="form-control" required="">
-                <option value="Emergency">Emergency</option>
-                  <option value="Non-Emergency">Non-Emergency</option>
-                </select> 
-</div>
+                <form class="form-horizontal style-form" method="post" name="complaint" enctype="multipart/form-data">
 
-<label class="col-sm-2 col-sm-2 control-label">Department</label>
-<div class="col-sm-4">
-<select name="state" required="required" class="form-control">
-<option value="">Select Department</option>
-<?php $sql=mysqli_query($con,"select stateName from state ");
-while ($rw=mysqli_fetch_array($sql)) {
-  ?>
-  <option value="<?php echo htmlentities($rw['stateName']);?>"><?php echo htmlentities($rw['stateName']);?></option>
-<?php
-}
-?>
-
-</select>
-</div>
-</div>
-
-<div class="form-group">
-<label class="col-sm-2 col-sm-2 control-label">Location</label>
-<div class="col-sm-4">
-<select name="locations" class="form-control" required="">
-                <option value="">Select Your Location</option>
-                <option value="Chennai">Chennai</option>
-                  <option value="Bangalore">Bangalore</option>
-                </select> 
-
-</div>
-<label class="col-sm-2 col-sm-2 control-label"></label>
-<!-- <div class="col-sm-4">-->
-<!--<select name="subcategory" id="subcategory" class="form-control" >-->
-<!--<option value="">Select Subcategory</option>-->
-<!--</select>-->
-<!--</div>-->
- </div>
-
-
-<div class="form-group">
-<label class="col-sm-2 col-sm-2 control-label">Requirement Details (max 2000 words) </label>
-<div class="col-sm-6">
-<textarea  name="reqdetails" required="required" cols="10" rows="10" class="form-control" maxlength="2000"></textarea>
-</div>
-</div>
-<div class="form-group">
-<label class="col-sm-2 col-sm-2 control-label">Requirement Related Doc(if any) </label>
-<div class="col-sm-6">
-<input type="file" name="reqfile" class="form-control" value="">
-</div>
-</div>
+                  <div class="form-group">
+                    <label class="col-sm-2 col-sm-2 control-label">Category</label>
+                    <div class="col-sm-4">
+                      <select name="category" id="category" class="form-control" onChange="getCat(this.value);"
+                        required="">
+                        <option value="">Select Category</option>
+                        <?php $sql = mysqli_query($con, "select id,categoryName from category ");
+                        while ($rw = mysqli_fetch_array($sql)) {
+                          ?>
+                          <option value="<?php echo htmlentities($rw['id']); ?>">
+                            <?php echo htmlentities($rw['categoryName']); ?>
+                          </option>
+                          <?php
+                        }
+                        ?>
+                      </select>
+                    </div>
+                    <label class="col-sm-2 col-sm-2 control-label">Sub Category </label>
+                    <div class="col-sm-4">
+                      <select name="subcategory" id="subcategory" class="form-control">
+                        <option value="">Select Subcategory</option>
+                      </select>
+                    </div>
+                  </div>
 
 
 
-                          <div class="form-group">
-                           <div class="col-sm-10" style="padding-left:25% ">
-<button type="submit" name="submit" class="btn btn-primary">Submit</button>
-</div>
-</div>
 
-                          </form>
-                          </div>
-                          </div>
-                          </div>
-                          
-          	
-          	
-		</section>
+                  <div class="form-group">
+                    <label class="col-sm-2 col-sm-2 control-label">Requirement Type</label>
+                    <div class="col-sm-4">
+                      <select name="reqtype" class="form-control" required="">
+                        <option value="Emergency">Emergency</option>
+                        <option value="Non-Emergency">Non-Emergency</option>
+                      </select>
+                    </div>
+
+                    <label class="col-sm-2 col-sm-2 control-label">Department</label>
+                    <div class="col-sm-4">
+                      <select name="state" required="required" class="form-control">
+                        <option value="">Select Department</option>
+                        <?php $sql = mysqli_query($con, "select stateName from state ");
+                        while ($rw = mysqli_fetch_array($sql)) {
+                          ?>
+                          <option value="<?php echo htmlentities($rw['stateName']); ?>">
+                            <?php echo htmlentities($rw['stateName']); ?>
+                          </option>
+                          <?php
+                        }
+                        ?>
+
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-sm-2 col-sm-2 control-label">Location</label>
+                    <div class="col-sm-4">
+                      <select name="locations" class="form-control" required="">
+                        <option value="">Select Your Location</option>
+                        <option value="Chennai">Chennai</option>
+                        <option value="Bangalore">Bangalore</option>
+                      </select>
+
+                    </div>
+                    <label class="col-sm-2 col-sm-2 control-label"></label>
+                    <!-- <div class="col-sm-4">-->
+                    <!--<select name="subcategory" id="subcategory" class="form-control" >-->
+                    <!--<option value="">Select Subcategory</option>-->
+                    <!--</select>-->
+                    <!--</div>-->
+                  </div>
+
+
+                  <div class="form-group">
+                    <label class="col-sm-2 col-sm-2 control-label">Requirement Details (max 2000 words) </label>
+                    <div class="col-sm-6">
+                      <textarea name="reqdetails" required="required" cols="10" rows="10" class="form-control"
+                        maxlength="2000"></textarea>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 col-sm-2 control-label">Requirement Related Doc(if any) </label>
+                    <div class="col-sm-6">
+                      <input type="file" name="reqfile" class="form-control" value="">
+                    </div>
+                  </div>
+
+
+
+                  <div class="form-group">
+                    <div class="col-sm-10" style="padding-left:25% ">
+                      <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                  </div>
+
+                </form>
+              </div>
+            </div>
+          </div>
+
+
+
+        </section>
       </section>
-    <?php include("includes/footer.php");?>
-  </section>
+      <?php include("includes/footer.php"); ?>
+    </section>
 
     <!-- js placed at the end of the document so the pages load faster -->
     <script src="assets/js/jquery.js"></script>
@@ -268,33 +269,34 @@ while ($rw=mysqli_fetch_array($sql)) {
     <!--script for this page-->
     <script src="assets/js/jquery-ui-1.9.2.custom.min.js"></script>
 
-	<!--custom switch-->
-	<script src="assets/js/bootstrap-switch.js"></script>
-	
-	<!--custom tagsinput-->
-	<script src="assets/js/jquery.tagsinput.js"></script>
-	
-	<!--custom checkbox & radio-->
-	
-	<script type="text/javascript" src="assets/js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-	<script type="text/javascript" src="assets/js/bootstrap-daterangepicker/date.js"></script>
-	<script type="text/javascript" src="assets/js/bootstrap-daterangepicker/daterangepicker.js"></script>
-	
-	<script type="text/javascript" src="assets/js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
-	
-	
-	<script src="assets/js/form-component.js"></script>    
-    
-    
-  <script>
+    <!--custom switch-->
+    <script src="assets/js/bootstrap-switch.js"></script>
+
+    <!--custom tagsinput-->
+    <script src="assets/js/jquery.tagsinput.js"></script>
+
+    <!--custom checkbox & radio-->
+
+    <script type="text/javascript" src="assets/js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap-daterangepicker/date.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+    <script type="text/javascript" src="assets/js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
+
+
+    <script src="assets/js/form-component.js"></script>
+
+
+    <script>
       //custom select box
 
-      $(function(){
-          $('select.styled').customSelect();
+      $(function () {
+        $('select.styled').customSelect();
       });
 
-  </script>
+    </script>
 
   </body>
-</html>
+
+  </html>
 <?php } ?>

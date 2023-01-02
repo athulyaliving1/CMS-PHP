@@ -15,12 +15,14 @@
 							<i class="icon-tasks"></i>
 							Not Process Yet Complaint
 							<?php
-                            $rt = mysqli_query($con, "SELECT * FROM tblcomplaints WHERE status IS NULL");
-                            $num1 = mysqli_num_rows($rt); { ?>
-							{??
+							$rt = mysqli_query($con, "SELECT * FROM tblcomplaints WHERE status IS NULL");
+							$num1 = mysqli_num_rows($rt); { ?>
+								{??
 
-							<b class="label orange pull-right"><?php echo htmlentities($num1); ?></b>
-							<?php } ?>
+								<b class="label orange pull-right">
+									<?php echo htmlentities($num1); ?>
+								</b>
+								<?php } ?>
 						</a>
 					</li>
 					<li>
@@ -28,10 +30,12 @@
 							<i class="icon-tasks"></i>
 							Pending Complaint
 							<?php
-                            $status = "in Process";
-                            $rt = mysqli_query($con, "SELECT * FROM tblcomplaints where status='$status'");
-                            $num1 = mysqli_num_rows($rt); { ?><b class="label orange pull-right"><?php echo htmlentities($num1); ?></b>
-							<?php } ?>
+							$status = "in Process";
+							$rt = mysqli_query($con, "SELECT * FROM tblcomplaints where status='$status'");
+							$num1 = mysqli_num_rows($rt); { ?><b class="label orange pull-right">
+									<?php echo htmlentities($num1); ?>
+								</b>
+								<?php } ?>
 						</a>
 					</li>
 					<li>
@@ -39,10 +43,12 @@
 							<i class="icon-inbox"></i>
 							Closed Complaints
 							<?php
-                            $status = "closed";
-                            $rt = mysqli_query($con, "SELECT * FROM tblcomplaints where status='$status'");
-                            $num1 = mysqli_num_rows($rt); { ?><b class="label green pull-right"><?php echo htmlentities($num1); ?></b>
-							<?php } ?>
+							$status = "closed";
+							$rt = mysqli_query($con, "SELECT * FROM tblcomplaints where status='$status'");
+							$num1 = mysqli_num_rows($rt); { ?><b class="label green pull-right">
+									<?php echo htmlentities($num1); ?>
+								</b>
+								<?php } ?>
 
 						</a>
 					</li>
@@ -62,12 +68,14 @@
 							<i class="icon-tasks"></i>
 							Not Process Yet Purchases
 							<?php
-                            $rt = mysqli_query($con, "SELECT * FROM requirements where status is null");
-                            $num1 = mysqli_num_rows($rt); { ?>
-							{??
+							$rt = mysqli_query($con, "SELECT * FROM requirements where status is null");
+							$num1 = mysqli_num_rows($rt); { ?>
+								{??
 
-							<b class="label orange pull-right"><?php echo htmlentities($num1); ?></b>
-							<?php } ?>
+								<b class="label orange pull-right">
+									<?php echo htmlentities($num1); ?>
+								</b>
+								<?php } ?>
 						</a>
 					</li>
 					<li>
@@ -75,10 +83,12 @@
 							<i class="icon-tasks"></i>
 							Pending Purchases
 							<?php
-                            $status = "in Process";
-                            $rt = mysqli_query($con, "SELECT * FROM requirements where status='$status'");
-                            $num1 = mysqli_num_rows($rt); { ?><b class="label orange pull-right"><?php echo htmlentities($num1); ?></b>
-							<?php } ?>
+							$status = "in Process";
+							$rt = mysqli_query($con, "SELECT * FROM requirements where status='$status'");
+							$num1 = mysqli_num_rows($rt); { ?><b class="label orange pull-right">
+									<?php echo htmlentities($num1); ?>
+								</b>
+								<?php } ?>
 						</a>
 					</li>
 					<li>
@@ -86,10 +96,12 @@
 							<i class="icon-inbox"></i>
 							Closed Purchases
 							<?php
-                            $status = "closed";
-                            $rt = mysqli_query($con, "SELECT * FROM requirements where status='$status'");
-                            $num1 = mysqli_num_rows($rt); { ?><b class="label green pull-right"><?php echo htmlentities($num1); ?></b>
-							<?php } ?>
+							$status = "closed";
+							$rt = mysqli_query($con, "SELECT * FROM requirements where status='$status'");
+							$num1 = mysqli_num_rows($rt); { ?><b class="label green pull-right">
+									<?php echo htmlentities($num1); ?>
+								</b>
+								<?php } ?>
 
 						</a>
 					</li>
@@ -108,12 +120,14 @@
 							<i class="icon-tasks"></i>
 							Not Process Yet Requirements
 							<?php
-                            $rt = mysqli_query($con, "SELECT * FROM requirements where status is null");
-                            $num1 = mysqli_num_rows($rt); { ?>
-							{??
+							$rt = mysqli_query($con, "SELECT * FROM requirements where status is null");
+							$num1 = mysqli_num_rows($rt); { ?>
+								{??
 
-							<b class="label orange pull-right"><?php echo htmlentities($num1); ?></b>
-							<?php } ?>
+								<b class="label orange pull-right">
+									<?php echo htmlentities($num1); ?>
+								</b>
+								<?php } ?>
 						</a>
 					</li>
 					<li>
@@ -121,10 +135,12 @@
 							<i class="icon-tasks"></i>
 							Pending Requirements
 							<?php
-                            $status = "in Process";
-                            $rt = mysqli_query($con, "SELECT * FROM requirements where status='$status'");
-                            $num1 = mysqli_num_rows($rt); { ?><b class="label orange pull-right"><?php echo htmlentities($num1); ?></b>
-							<?php } ?>
+							$status = "in Process";
+							$rt = mysqli_query($con, "SELECT * FROM requirements where status='$status'");
+							$num1 = mysqli_num_rows($rt); { ?><b class="label orange pull-right">
+									<?php echo htmlentities($num1); ?>
+								</b>
+								<?php } ?>
 						</a>
 					</li>
 					<li>
@@ -132,10 +148,12 @@
 							<i class="icon-inbox"></i>
 							Closed Requirements
 							<?php
-                            $status = "closed";
-                            $rt = mysqli_query($con, "SELECT * FROM requirements where status='$status'");
-                            $num1 = mysqli_num_rows($rt); { ?><b class="label green pull-right"><?php echo htmlentities($num1); ?></b>
-							<?php } ?>
+							$status = "closed";
+							$rt = mysqli_query($con, "SELECT * FROM requirements where status='$status'");
+							$num1 = mysqli_num_rows($rt); { ?><b class="label green pull-right">
+									<?php echo htmlentities($num1); ?>
+								</b>
+								<?php } ?>
 
 						</a>
 					</li>
