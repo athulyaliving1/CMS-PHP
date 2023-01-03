@@ -8,10 +8,13 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 } else {
     echo "Connection successful";
-
 }
 
 ?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,10 +25,7 @@ if (!$conn) {
     <title>Document</title>
 </head>
 
-
 <body>
-
-
     <?php
 
     include("include/header.php");
@@ -36,18 +36,12 @@ if (!$conn) {
         <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
 
             <div>
-                <button id="dropdownRadioButton" data-dropdown-toggle="dropdownRadio"
-                    class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-                    type="button">
-                    <svg class="mr-2 w-4 h-4 text-gray-400" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
-                            clip-rule="evenodd"></path>
+                <button id="dropdownRadioButton" data-dropdown-toggle="dropdownRadio" class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
+                    <svg class="mr-2 w-4 h-4 text-gray-400" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
                     </svg>
                     Last 30 days
-                    <svg class="ml-2 w-3 h-3" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
+                    <svg class="ml-2 w-3 h-3" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </button>
@@ -81,7 +75,7 @@ if (!$conn) {
                                 vendor
                             </th>
                             <th scope="col" class="col-2  py-3 px-6">
-                                status
+                                Acknownledge Status
                             </th>
 
                         </tr>
@@ -97,44 +91,42 @@ if (!$conn) {
                         $limit = 5;
 
                         // query to retrieve all rows from the table Countries
-                        
-                        $getQuery = "SELECT * FROM purchaserequest WHERE status='request'";
+
+                        $getQuery = "SELECT * FROM purchaserequest WHERE status='Approved'";
 
 
                         // get the result
-                        
+
                         $result = mysqli_query($conn, $getQuery);
 
                         $total_rows = mysqli_num_rows($result);
 
                         // get the required number of pages
-                        
+
                         $total_pages = ceil($total_rows / $limit);
 
                         // update the active page number
-                        
+
                         if (!isset($_GET['page'])) {
 
                             $page_number = 1;
-
                         } else {
 
                             $page_number = $_GET['page'];
-
                         }
 
                         // get the initial page number
-                        
+
                         $initial_page = ($page_number - 1) * $limit;
 
                         // get data of selected rows per page    
-                        
-                        $getQuery = "SELECT * FROM purchaserequest LIMIT " . $initial_page . ',' . $limit;
+
+                        $getQuery = "SELECT * FROM purchaserequest WHERE status='Approved' LIMIT " . $initial_page . ',' . $limit;
 
                         $result = mysqli_query($conn, $getQuery);
 
                         //display the retrieved result on the webpage  
-                        
+
 
 
 
@@ -144,9 +136,9 @@ if (!$conn) {
                         while ($row = mysqli_fetch_array($result)) {
 
                             // echo $row['id'] . ' ' . $row['vendorname'] . '</br>';
-                        
 
-                            ?>
+
+                        ?>
 
                             <tr class="bg-white border-b hover:bg-gray-50 ">
 
@@ -181,18 +173,13 @@ if (!$conn) {
 
                                 <td class="flex items-center py-4 px-6 space-x-3 place-content-center ">
                                     <div>
-                                        <a href="vendorlistedit.php?edit=<?php echo $row['id']; ?>   "
-                                            class="font-medium text-blue-600  hover:underline">Approval</a>
+                                        <a href="createpo.php?edit=<?php echo $row['id']; ?>   " class="font-medium text-blue-600  hover:underline">Status</a>
                                     </div>
-                                    <div>
-                                        <button><a href="vendorlist.php?del=<?php echo $row['id']; ?>"
-                                                class="font-medium text-red-600  hover:underline">Reject</a> </button>
 
-                                    </div>
                                 </td>
 
                             </tr>
-                            <?php
+                        <?php
 
 
 
@@ -209,15 +196,14 @@ if (!$conn) {
                         <div class="flex items-center space-x-5">
                             <?php
                             // show page number with link   
-                            
+
 
 
 
 
                             for ($page_number = 1; $page_number <= $total_pages; $page_number++) {
 
-                                echo '<a href = "adminaproval.php?page=' . $page_number . '">' . $page_number . ' </a>';
-
+                                echo '<a href = "purchasedashboard.php?page=' . $page_number . '">' . $page_number . ' </a>';
                             }
 
 
@@ -260,7 +246,7 @@ if (!$conn) {
                 </div>
             </div>
             <script type="text/javascript">
-                $(".remove").click(function () {
+                $(".remove").click(function() {
                     var id = $(this).parents("tr").attr("id");
 
 
@@ -268,19 +254,19 @@ if (!$conn) {
                         $.ajax({
                             url: '/vendorlist.php',
                             type: 'GET',
-                            data: { id: id },
-                            error: function () {
+                            data: {
+                                id: id
+                            },
+                            error: function() {
                                 alert('Something is wrong');
                             },
-                            success: function (data) {
+                            success: function(data) {
                                 $("#" + id).remove();
                                 alert("Record removed successfully");
                             }
                         });
                     }
                 });
-
-
             </script>
 
             <script src="https://unpkg.com/flowbite@1.5.5/dist/flowbite.js"></script>

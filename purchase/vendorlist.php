@@ -42,8 +42,7 @@ if (isset($_GET['del'])) {
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.5/dist/flowbite.min.css" />
@@ -99,8 +98,8 @@ if (isset($_GET['del'])) {
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 
     <script language="JavaScript" type="text/javascript">
-        $(document).ready(function () {
-            $("a.delete").click(function (e) {
+        $(document).ready(function() {
+            $("a.delete").click(function(e) {
                 if (!confirm('Are you sure?')) {
                     e.preventDefault();
                     return false;
@@ -126,18 +125,12 @@ if (isset($_GET['del'])) {
         <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
 
             <div>
-                <button id="dropdownRadioButton" data-dropdown-toggle="dropdownRadio"
-                    class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-                    type="button">
-                    <svg class="mr-2 w-4 h-4 text-gray-400" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
-                            clip-rule="evenodd"></path>
+                <button id="dropdownRadioButton" data-dropdown-toggle="dropdownRadio" class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
+                    <svg class="mr-2 w-4 h-4 text-gray-400" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
                     </svg>
                     Last 30 days
-                    <svg class="ml-2 w-3 h-3" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
+                    <svg class="ml-2 w-3 h-3" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </button>
@@ -204,44 +197,42 @@ if (isset($_GET['del'])) {
                         $limit = 5;
 
                         // query to retrieve all rows from the table Countries
-                        
+
                         $getQuery = "select * from vendorlist";
 
 
                         // get the result
-                        
+
                         $result = mysqli_query($con, $getQuery);
 
                         $total_rows = mysqli_num_rows($result);
 
                         // get the required number of pages
-                        
+
                         $total_pages = ceil($total_rows / $limit);
 
                         // update the active page number
-                        
+
                         if (!isset($_GET['page'])) {
 
                             $page_number = 1;
-
                         } else {
 
                             $page_number = $_GET['page'];
-
                         }
 
                         // get the initial page number
-                        
+
                         $initial_page = ($page_number - 1) * $limit;
 
                         // get data of selected rows per page    
-                        
+
                         $getQuery = "SELECT *FROM vendorlist LIMIT " . $initial_page . ',' . $limit;
 
                         $result = mysqli_query($con, $getQuery);
 
                         //display the retrieved result on the webpage  
-                        
+
 
 
 
@@ -251,9 +242,9 @@ if (isset($_GET['del'])) {
                         while ($row = mysqli_fetch_array($result)) {
 
                             // echo $row['id'] . ' ' . $row['vendorname'] . '</br>';
-                        
 
-                            ?>
+
+                        ?>
 
                             <tr class="bg-white border-b hover:bg-gray-50 ">
 
@@ -305,19 +296,16 @@ if (isset($_GET['del'])) {
 
                                 <td class="flex items-center py-4 px-6 space-x-3 place-content-center ">
                                     <div>
-                                        <a href="vendorlistedit.php?edit=<?php echo $row['id']; ?>   "
-                                            onclick="return checkDelete()"
-                                            class="font-medium text-blue-600  hover:underline">Edit</a>
+                                        <a href="vendorlistedit.php?edit=<?php echo $row['id']; ?>   " onclick="return checkDelete()" class="font-medium text-blue-600  hover:underline">Edit</a>
                                     </div>
                                     <div>
-                                        <button><a href="vendorlist.php?del=<?php echo $row['id']; ?>"
-                                                class="font-medium text-red-600  hover:underline">Delete</a> </button>
+                                        <button><a href="vendorlist.php?del=<?php echo $row['id']; ?>" class="font-medium text-red-600  hover:underline">Delete</a> </button>
 
                                     </div>
                                 </td>
 
                             </tr>
-                            <?php
+                        <?php
 
 
 
@@ -334,7 +322,7 @@ if (isset($_GET['del'])) {
                         <div class="flex items-center space-x-5">
                             <?php
                             // show page number with link   
-                            
+
 
 
 
@@ -342,7 +330,6 @@ if (isset($_GET['del'])) {
                             for ($page_number = 1; $page_number <= $total_pages; $page_number++) {
 
                                 echo '<a href = "vendorlist.php?page=' . $page_number . '">' . $page_number . ' </a>';
-
                             }
 
 
@@ -385,7 +372,7 @@ if (isset($_GET['del'])) {
                 </div>
             </div>
             <script type="text/javascript">
-                $(".remove").click(function () {
+                $(".remove").click(function() {
                     var id = $(this).parents("tr").attr("id");
 
 
@@ -393,19 +380,19 @@ if (isset($_GET['del'])) {
                         $.ajax({
                             url: '/vendorlist.php',
                             type: 'GET',
-                            data: { id: id },
-                            error: function () {
+                            data: {
+                                id: id
+                            },
+                            error: function() {
                                 alert('Something is wrong');
                             },
-                            success: function (data) {
+                            success: function(data) {
                                 $("#" + id).remove();
                                 alert("Record removed successfully");
                             }
                         });
                     }
                 });
-
-
             </script>
 
             <script src="https://unpkg.com/flowbite@1.5.5/dist/flowbite.js"></script>

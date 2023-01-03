@@ -89,43 +89,43 @@ if (strlen($_SESSION['login']) == "") {
 
 
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                }
-                                                                                                                                                                                                                                                                screens: {
-                    ss: "320px",
-                    // => @media (min-width: 640px) { ... }
-
-                    sm: "375px",
-                    sl: "425px",
-
-                    md: "768px",
-                    // => @media (min-width: 768px) { ... }
-
-                    lg: "1024px",
-                    // => @media (min-width: 1024px) { ... }
-
-                    xl: "1280px",
-                    // => @media (min-width: 1280px) { ... }
-
-                    desktop: "1440px",
-                    // => @media (min-width: 1536px) { ... }
+    tailwind.config = {
+        theme: {
+            extend: {
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
                 },
             }
-                                                                                                                                                                                                                                                            container: {
-                padding: {
-                    DEFAULT: "1rem",
-                    sm: "2rem",
-                    lg: "4rem",
-                    xl: "5rem",
-                    "2xl": "6rem",
-                },
+            screens: {
+                ss: "320px",
+                // => @media (min-width: 640px) { ... }
+
+                sm: "375px",
+                sl: "425px",
+
+                md: "768px",
+                // => @media (min-width: 768px) { ... }
+
+                lg: "1024px",
+                // => @media (min-width: 1024px) { ... }
+
+                xl: "1280px",
+                // => @media (min-width: 1280px) { ... }
+
+                desktop: "1440px",
+                // => @media (min-width: 1536px) { ... }
             },
         }
+        container: {
+            padding: {
+                DEFAULT: "1rem",
+                sm: "2rem",
+                lg: "4rem",
+                xl: "5rem",
+                "2xl": "6rem",
+            },
+        },
+    }
     </script>
 
     <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v5.15.1/css/pro.min.css" />
@@ -175,22 +175,20 @@ if (strlen($_SESSION['login']) == "") {
                             <label for="state" class="block mb-2 text-sm font-medium text-gray-900 ">State
 
                             </label>
-                            <select name="state" id="country-list" onChange="getState(this.value);"
+                            <select name="state" id="state"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 ">
-                                <option value="">Select State
+                                <option value=" ">Choose a State</option>
+                                <option value="Tamil Nadu">
+                                    Tamil Nadu</option>
+                                <option value="Karanataka">
+                                    Karanataka</option>
+                                <option value="Kerala">
+                                    Kerala
                                 </option>
-                                <?php
 
-                                $countryResult = mysqli_query($conn, "select country_name from country");
+                                <option value="Cochin">
+                                    Cochin</option>
 
-                                foreach ($countryResult as $country) {
-                                    ?>
-                                    <option value="<?php echo $country["id"]; ?>">
-                                        <?php echo $country["country_name"]; ?>
-                                    </option>
-                                    <?php
-                                }
-                                ?>
 
 
                             </select>
@@ -224,7 +222,6 @@ if (strlen($_SESSION['login']) == "") {
 
                     </div>
 
-
                     <div class='mb-6'>
 
                         <label for="place" class="block mb-2 text-sm font-medium text-gray-900 ">Place
@@ -232,7 +229,8 @@ if (strlen($_SESSION['login']) == "") {
                         </label>
                         <select name="place" id="place"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 ">
-                            <option value=" ">Choose a Place</option>
+                            <option value="">Select Place</option>
+
                             <option value="Chennai">
                                 Chennai</option>
                             <option value="Bangalore">
@@ -242,8 +240,6 @@ if (strlen($_SESSION['login']) == "") {
 
                             <option value="Cochin">
                                 Cochin</option>
-
-
 
                         </select>
 
@@ -260,11 +256,12 @@ if (strlen($_SESSION['login']) == "") {
             <div class="grid gap-6 mb-6 lg:grid-cols-3 rounded-2xl">
 
                 <div>
-                    <label for="product" class="block mb-2 text-sm font-medium text-gray-900 ">
-                        Product-Description</label>
-                    <input type="text" id="product" name="product"
+                    <label for="product" class="block mb-2 text-sm font-medium text-gray-900 ">Product_description
+
+                    </label>
+                    <input type="text" id="productdesc" name="product"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
-                        placeholder="Product_Description" required>
+                        placeholder="John" required>
                 </div>
                 <div>
                     <label for="qty" class="block mb-2 text-sm font-medium text-gray-900 ">Qty
@@ -287,15 +284,15 @@ if (strlen($_SESSION['login']) == "") {
                         while ($rw = mysqli_fetch_assoc($sql)) {
                             ?>
 
-                            <option value="<?php echo $rw['vendorname']; ?>">
-                                <?php echo $rw['vendorname']; ?>
-                            </option>
-                            <?php
+                        <option value="<?php echo $rw['vendorname']; ?>">
+                            <?php echo $rw['vendorname']; ?>
+                        </option>
+                        <?php
                         }
                         ?>
 
 
-                        <select name="state" required="required" value="<?php'$vendorname' ?>">
+                        <select name="state" required="required" value="<?php'$vendorname'?>">
 
 
 
@@ -458,33 +455,32 @@ if (strlen($_SESSION['login']) == "") {
     </div>
 
     <script>
-        function getState(val) {
-            $("#loader").show();
-            $.ajax({
-                type: "POST",
-                url: "./ajax/purchaserequest.php",
-                data: 'state_id=' + val,
-                success: function (data) {
-                    $("#location-list").html(data);
-                    $("#loader").hide();
-                }
-            });
-        }
-        P
-
+    function getState(val) {
+        $("#loader").show();
+        $.ajax({
+            type: "POST",
+            url: "./ajax/purchaserequest.php",
+            data: 'state_id=' + val,
+            success: function(data) {
+                $("#location-list").html(data);
+                $("#loader").hide();
+            }
+        });
+    }
+    P
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script>
-        $(document).ready(function () {
-            $("#aj").click(function () {
-                $.ajax({
-                    url: 'check.php',
-                    success: function (msg) {
-                        alert(msg);
-                    }
-                });
+    $(document).ready(function() {
+        $("#aj").click(function() {
+            $.ajax({
+                url: 'check.php',
+                success: function(msg) {
+                    alert(msg);
+                }
             });
         });
+    });
     </script>
 
 
