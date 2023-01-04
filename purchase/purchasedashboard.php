@@ -32,7 +32,7 @@ if (!$conn) {
     include("include/sidebar1.php");
     ?>
 
-    <div class="container mx-auto">
+    <div class="container mx-auto bg-white  p-16">
         <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
 
             <div>
@@ -52,6 +52,9 @@ if (!$conn) {
 
                             <th scope="col" class="py-3 px-6">
                                 id
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                userid
                             </th>
                             <th scope="col" class="py-3 px-6">
                                 name
@@ -148,6 +151,10 @@ if (!$conn) {
                                     <?php echo htmlentities($row['id']); ?>
                                 </th>
                                 <td class="py-4 px-6">
+                                    <?php echo htmlentities($row['userid']); ?>
+                                </td>
+
+                                <td class="py-4 px-6">
                                     <?php echo htmlentities($row['name']); ?>
                                 </td>
                                 <td class="py-4 px-6">
@@ -173,7 +180,8 @@ if (!$conn) {
 
                                 <td class="flex items-center py-4 px-6 space-x-3 place-content-center ">
                                     <div>
-                                        <a href="createpo.php?id=<?php echo $row['id']; ?>   " class="font-medium text-blue-600  hover:underline">create P.O</a>
+
+                                        <a href="createpo.php?id=<?php echo $row['id']; ?>   " class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-blue-600 border border-blue-700 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">create P.O</a>
                                     </div>
 
                                 </td>

@@ -2,7 +2,7 @@
 	<div class="container flex justify-between h-16 mx-auto">
 		<a rel="noopener noreferrer" href="#" aria-label="Back to homepage"
 			class="flex items-center p-2 text-semibold text-pink">
-			CMS | ADMIN
+			PURCHASE| ADMIN
 		</a>
 		<!-- <ul class="items-stretch hidden space-x-3 lg:flex">
 			<li class="flex">

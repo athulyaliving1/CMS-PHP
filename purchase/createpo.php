@@ -3,7 +3,6 @@ session_start();
 error_reporting(0);
 include('include/config.php');
 
-
 if (!$con) {
     die("Connection failed: " . mysqli_connect_error());
 } else {
@@ -11,30 +10,41 @@ if (!$con) {
 }
 
 
-if (strlen($_SESSION['login']) == 0) {
+
+if (strlen($_SESSION['login']) == "") {
+    header('location:index.php');
 } else {
-    // $userid = $_get['id'];
-    // echo $userid;
 
     if (isset($_POST['submit'])) {
+
         // $uid = $_SESSION['id'];
-        $userid = $_get['id'];
+        $tempid = $_GET['id'];
+        $userid = $_POST['id'];
+
         $refno = $_POST['refno'];
         $paymentterms = $_POST['paymentterms'];
         $compfile = $_FILES["compfile"]["name"];
 
-        move_uploaded_file($_FILES["compfile"]["tmp_name"], "complaintdocs/" . $_FILES["compfile"]["name"]);
-
-        $query = mysqli_query($con, "insert into purchaseorder(userid,refno,paymentterms,compfile) values('$userid','$refno','$paymentterms','$compfile')");
 
 
-        echo  "insert into purchaseorder(refno,paymentterms,compfile) values('$refno','$paymentterms','$compfile')";
-        //echo "insert into tblcomplaints(userId,category,subcategory,complaintType,state,complaintDetails,complaintFile) values('$uid','$category','$subcat','$complaintype','$state','$complaintdetials','$compfile')";
-        if ($query) {
+        $reqfile = $_FILES["reqfile"]["name"];
+
+        move_uploaded_file($_FILES["reqfile"]["tmp_name"], "reqdocs/" . $_FILES["reqfile"]["name"]);
+        $sql =  "insert into purchaseorder(id,refno,paymentterms,compfile) values('$tempid','$refno','$paymentterms','$compfile')";
+        echo $sql;
+        echo $tempid;
+
+        if (mysqli_query($con, $sql)) {
+
+            echo '<script>alert("New record created successfully")</script>';
             echo "New record created successfully";
         } else {
-            echo "Error: " . $query . "<br>" . mysqli_error($con);
+            echo "Error: " . $sql . "<br>" . mysqli_error($con);
         }
+
+        // $query=mysqli_query($con,"insert into tblrequirements (userId,category,subcategory,requirementsType,state,requirementsDetails,reqfile) values('$uid','$category','$subcat','$complaintype','$state','$complaintdetials','$reqfile','$locations')")
+
+        //echo "INSERT INTO vendorlist (`userId`,`vendorname`,`contactperson `,`gstnumber`,`pannumber`,`email`,`accountnumber`, `ifsccode `,`address` , `department`,`state, `place `) VALUES ('$uid','$vendorname','$contactperson','$gstnumber`,'$pannumber','$email','$accountnumber','$ifsccode ','$address','$department','$state ','$place')";
     }
 }
 ?>
@@ -47,7 +57,7 @@ if (strlen($_SESSION['login']) == 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="Dashboard">
-    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+
 
     <title>CMS | User Register Requirement</title>
 
@@ -123,52 +133,56 @@ if (strlen($_SESSION['login']) == 0) {
     ?>
     <!-- component -->
     <!-- This is an example component -->
-    <div class="bg-gray-300 w-full h-full ">
-        <?php
 
-        include("include/sidebar1.php");
-        ?>
-        <div class="container mx-auto  p-16">
+    <?php
 
-            <form action="" method="post" enctype="multipart/form-data">
-                <div class="grid gap-6 mb-6 lg:grid-cols-3 rounded-2xl">
+    include("include/sidebar1.php");
+    ?>
+    <div class="container mx-auto bg-white  p-16">
 
+        <form action="" method="post" enctype="multipart/form-data">
+            <div class="grid gap-6 mb-6 lg:grid-cols-4 rounded-2xl">
+                <div>
+                    <label for="idnumber" class="block mb-2 text-sm font-medium text-gray-900 ">id
+                        Number</label>
+                    <input value="<?php echo $_GET['id']; ?>" type="number" id="idnumber" name="id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 " disabled placeholder="John" required>
+                </div>
 
-                    <div>
-                        <label for="refnumber" class="block mb-2 text-sm font-medium text-gray-900 ">Reference
-                            Number</label>
-                        <input type="text" id="refnumber" name="refno" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 " placeholder="John" required>
-                    </div>
-                    <div>
-                        <label for="pay" class="block mb-2 text-sm font-medium text-gray-900 ">payment term
-                        </label>
-                        <input type="text" id="pay" name="paymentterms" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 " placeholder="Doe" required>
-                    </div>
-                    <div>
+                <div>
+                    <label for="refnumber" class="block mb-2 text-sm font-medium text-gray-900 ">Reference
+                        Number</label>
+                    <input type="text" id="refnumber" name="refno" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 " placeholder="John" required>
+                </div>
+                <div>
+                    <label for="pay" class="block mb-2 text-sm font-medium text-gray-900 ">payment term
+                    </label>
+                    <input type="text" id="pay" name="paymentterms" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 " placeholder="Doe" required>
+                </div>
+                <div>
 
-                        <label for="myFile" class="block mb-2 text-sm font-medium text-gray-900 ">
-                            File Upload
-                        </label>
-                        <input type="file" for="filename" id="myFile" name="compfile" accept=".pdf" value="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 " placeholder="123-45-678" required>
+                    <label for="myFile" class="block mb-2 text-sm font-medium text-gray-900 ">
+                        File Upload
+                    </label>
+                    <input type="file" for="filename" id="myFile" name="compfile" accept=".pdf" value="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 " placeholder="123-45-678" required>
 
-
-                    </div>
-
-
-
-                    <div class="grid gap-4 place-content-center">
-                        <button type="submit" class="text-white bg-pink-500 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center " name="submit">Save</button>
-
-                    </div>
 
                 </div>
 
 
-            </form>
+
+                <div class="grid gap-4 place-content-center">
+                    <button type="submit" class="text-white bg-pink-500 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center " name="submit">Save</button>
+
+                </div>
+
+            </div>
 
 
-        </div>
+        </form>
+
+
     </div>
+
 
 
 

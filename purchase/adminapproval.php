@@ -50,7 +50,7 @@ if (isset($_POST['rejected'])) {
     include("include/sidebar1.php");
     ?>
 
-    <div class="container mx-auto">
+    <div class="container mx-auto bg-white  p-16">
         <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
 
             <div>
@@ -203,14 +203,20 @@ if (isset($_POST['rejected'])) {
                                         <?php echo htmlentities($row['vendor']); ?>
                                     </td>
 
-                                    <td>
+                                    <td class="py-4">
                                         <form method="post" action="">
                                             <input type="hidden" name="row_id" value="<?= $row['id']; ?>" />
-                                            <button type="submit" name="approved">Approve</button>
+                                            <button type="submit" name="approved" class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-green-600 border border-green-500 rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                                Approve
+                                            </button>
+
+
                                         </form>
                                         <form method="post" action="">
+
+
                                             <input type="hidden" name="row_id" value="<?= $row['id']; ?>" />
-                                            <button type="submit" name="rejected">Reject</button>
+                                            <button class="inline-flex items-center justify-center px-6 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-red-500 border border-red-500 rounded-md shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500" type="submit" name="rejected">Reject</button>
                                         </form>
                                     </td>
                                 </tr>

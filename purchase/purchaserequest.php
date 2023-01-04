@@ -27,7 +27,7 @@ if (strlen($_SESSION['login']) == "") {
         $qty = $_POST['qty'];
         $vendor = $_POST['vendor'];
 
-
+       
 
         //$reqfile = $_FILES["reqfile"]["name"];
 
@@ -39,7 +39,8 @@ if (strlen($_SESSION['login']) == "") {
         // echo $sql;
 
         if (mysqli_query($conn, $sql)) {
-            echo "New record created successfully";
+            echo '<script>alert("New record created successfully")</script>';
+            // echo "New record created successfully";
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
@@ -95,7 +96,7 @@ if (strlen($_SESSION['login']) == "") {
                 fontFamily: {
                     sans: ['Inter', 'sans-serif'],
                 },
-            }
+            },
             screens: {
                 ss: "320px",
                 // => @media (min-width: 640px) { ... }
@@ -115,7 +116,7 @@ if (strlen($_SESSION['login']) == "") {
                 desktop: "1440px",
                 // => @media (min-width: 1536px) { ... }
             },
-        }
+        },
         container: {
             padding: {
                 DEFAULT: "1rem",
@@ -292,7 +293,7 @@ if (strlen($_SESSION['login']) == "") {
                         ?>
 
 
-                        <select name="state" required="required" value="<?php'$vendorname'?>">
+                        <select name="state" required="required" value="<?php'$vendorname'?>"> 
 
 
 

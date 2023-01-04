@@ -10,9 +10,15 @@ if (!$conn) {
     echo "Connection successful";
 }
 
+
+if (isset($_POST['acknowledge'])) {
+    $appUpdateQuery = "UPDATE purchaseorder SET status='acknowledged' WHERE id='" . $_POST['row_id'] . "'";
+    $appUpdateResult = mysqli_query($conn, $appUpdateQuery);
+    $appInsertQuery = "INSERT INTO purchaseorder (id,status) VALUES ('" . $_POST['row_id'] . "','acknowledged')";
+    $appInsertResult = mysqli_query($conn, $appInsertQuery);
+}
+
 ?>
-
-
 
 
 <!DOCTYPE html>
@@ -32,7 +38,7 @@ if (!$conn) {
     include("include/sidebar1.php");
     ?>
 
-    <div class="container mx-auto">
+    <div class="container mx-auto bg-white  p-16">
         <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
 
             <div>
@@ -59,11 +65,24 @@ if (!$conn) {
                             <th scope="col" class="py-3 px-6">
                                 Payment terms
                             </th>
-                            
+
                             <th scope="col" class="col-2  py-3 px-6">
                                 File name
-                                
+
                             </th>
+
+                            <th scope="col" class="col-2  py-3 px-6">
+                                P.O Status
+
+                            </th>
+                            <th scope="col" class="col-2  py-3 px-6">
+                                Action
+
+                            </th>
+
+
+
+                         
 
                         </tr>
                     </thead>
@@ -108,7 +127,7 @@ if (!$conn) {
 
                         // get data of selected rows per page    
 
-                        $getQuery = "SELECT * FROM purchaseorder  LIMIT " . $initial_page . ',' . $limit;
+                        $getQuery = "SELECT * FROM purchaseorder LIMIT  " . $initial_page . ',' . $limit;
 
                         $result = mysqli_query($conn, $getQuery);
 
@@ -143,14 +162,25 @@ if (!$conn) {
                                 <td class="py-4 px-6">
                                     <?php echo htmlentities($row['compfile']); ?>
                                 </td>
-                             
+                                <td class="py-4 px-6">
+                                    <?php echo htmlentities($row['status']); ?>
+                                </td>
+
 
 
 
                                 <td class="flex items-center py-4 px-6 space-x-3 place-content-center ">
-                                    <div>
-                                        <a href="accountapproval.php?edit=<?php echo $row['id']; ?>   " class="font-medium text-blue-600  hover:underline">Acknowledge</a>
-                                    </div>
+
+                                    <form method="post" action="">
+                                        <input type="hidden" name="row_id" value="<?= $row['id']; ?>" />
+                                        <button class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 " type="submit" name="acknowledge">Acknowledge</button>
+
+
+                                        
+                                    </form>
+
+
+
 
                                 </td>
 

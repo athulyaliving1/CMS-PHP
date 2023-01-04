@@ -55,7 +55,7 @@ if (isset($_GET['del'])) {
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
                     },
-                }
+                },
                 screens: {
                     ss: "320px",
                     // => @media (min-width: 640px) { ... }
@@ -75,7 +75,7 @@ if (isset($_GET['del'])) {
                     desktop: "1440px",
                     // => @media (min-width: 1536px) { ... }
                 },
-            }
+            },
             container: {
                 padding: {
                     DEFAULT: "1rem",
@@ -121,7 +121,7 @@ if (isset($_GET['del'])) {
     include("include/sidebar1.php");
     ?>
 
-    <div class="container mx-auto">
+    <div class="container mx-auto bg-white  p-16">
         <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
 
             <div>
@@ -296,10 +296,12 @@ if (isset($_GET['del'])) {
 
                                 <td class="flex items-center py-4 px-6 space-x-3 place-content-center ">
                                     <div>
-                                        <a href="vendorlistedit.php?edit=<?php echo $row['id']; ?>   " onclick="return checkDelete()" class="font-medium text-blue-600  hover:underline">Edit</a>
+
+
+                                        <a href="vendorlistedit.php?edit=<?php echo $row['id']; ?>   " onclick="return checkDelete()" class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-blue-600 border border-blue-700 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Edit</a>
                                     </div>
                                     <div>
-                                        <button><a href="vendorlist.php?del=<?php echo $row['id']; ?>" class="font-medium text-red-600  hover:underline">Delete</a> </button>
+                                        <button><a href="vendorlist.php?del=<?php echo $row['id']; ?>" class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-red-500 border border-red-800 rounded-md shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">Delete</a> </button>
 
                                     </div>
                                 </td>

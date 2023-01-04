@@ -32,7 +32,7 @@ if (!$conn) {
     include("include/sidebar1.php");
     ?>
 
-    <div class="container mx-auto">
+    <div class="container mx-auto bg-white  p-16">
         <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
 
             <div>
@@ -54,26 +54,15 @@ if (!$conn) {
                                 id
                             </th>
                             <th scope="col" class="py-3 px-6">
-                                name
+                                Ref No
                             </th>
                             <th scope="col" class="py-3 px-6">
-                                state
+                                PaymentTerms
                             </th>
                             <th scope="col" class="py-3 px-6">
-                                location
+                                Filename
                             </th>
-                            <th scope="col" class="py-3 px-10">
-                                place
-                            </th>
-                            <th scope="col" class="py-3 px-10">
-                                product
-                            </th>
-                            <th scope="col" class="py-3 px-10">
-                                qty
-                            </th>
-                            <th scope="col" class="py-3 px-6">
-                                vendor
-                            </th>
+
                             <th scope="col" class="col-2  py-3 px-6">
                                 Acknownledge Status
                             </th>
@@ -92,7 +81,7 @@ if (!$conn) {
 
                         // query to retrieve all rows from the table Countries
 
-                        $getQuery = "SELECT * FROM purchaserequest WHERE status='Approved'";
+                        $getQuery = "SELECT * FROM purchaseorder WHERE status='acknowledged'";
 
 
                         // get the result
@@ -121,7 +110,7 @@ if (!$conn) {
 
                         // get data of selected rows per page    
 
-                        $getQuery = "SELECT * FROM purchaserequest WHERE status='Approved' LIMIT " . $initial_page . ',' . $limit;
+                        $getQuery = "SELECT * FROM purchaseorder WHERE status='acknowledged' LIMIT " . $initial_page . ',' . $limit;
 
                         $result = mysqli_query($conn, $getQuery);
 
@@ -148,32 +137,24 @@ if (!$conn) {
                                     <?php echo htmlentities($row['id']); ?>
                                 </th>
                                 <td class="py-4 px-6">
-                                    <?php echo htmlentities($row['name']); ?>
+                                    <?php echo htmlentities($row['refno']); ?>
                                 </td>
                                 <td class="py-4 px-6">
-                                    <?php echo htmlentities($row['state']); ?>
+                                    <?php echo htmlentities($row['paymentterms']); ?>
                                 </td>
                                 <td class="py-4 px-6">
-                                    <?php echo htmlentities($row['location']); ?>
+                                    <?php echo htmlentities($row['compfile']); ?>
                                 </td>
                                 <td class="py-4 px-6">
-                                    <?php echo htmlentities($row['place']); ?>
+                                    <?php echo htmlentities($row['status']); ?>
                                 </td>
-                                <td class="py-4 px-6">
-                                    <?php echo htmlentities($row['product']); ?>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <?php echo htmlentities($row['qty']); ?>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <?php echo htmlentities($row['vendor']); ?>
-                                </td>
+
 
 
 
                                 <td class="flex items-center py-4 px-6 space-x-3 place-content-center ">
                                     <div>
-                                        <a href="createpo.php?edit=<?php echo $row['id']; ?>   " class="font-medium text-blue-600  hover:underline">Status</a>
+                                        <a href="Purchasestatus.php?edit=<?php echo $row['id']; ?>   " class="font-medium text-blue-600  hover:underline">Status</a>
                                     </div>
 
                                 </td>
@@ -203,7 +184,7 @@ if (!$conn) {
 
                             for ($page_number = 1; $page_number <= $total_pages; $page_number++) {
 
-                                echo '<a href = "purchasedashboard.php?page=' . $page_number . '">' . $page_number . ' </a>';
+                                echo '<a href = "Purchasestatus.php?page=' . $page_number . '">' . $page_number . ' </a>';
                             }
 
 
