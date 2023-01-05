@@ -23,24 +23,27 @@ if (strlen($_SESSION['login']) == "") {
         $state = $_POST['state'];
         $location = $_POST['location'];
         $place = $_POST['place'];
-        $product = $POST['product'];
-        $qty = $_POST['qty'];
         $vendor = $_POST['vendor'];
+        $price = $_POST['price'];
+        $department = $_POST['department'];
+        $productdesc = $POST['equipment'];
+        $qty = $_POST['qty'];
+ 
 
        
 
         //$reqfile = $_FILES["reqfile"]["name"];
 
         //move_uploaded_file($_FILES["reqfile"]["tmp_name"], "reqdocs/" . $_FILES["reqfile"]["name"]);
-        $sql = "INSERT INTO purchaserequest ( `name`,`state`,`location`,`place`,`product`,`qty`,`vendor`) VALUES 
+        $sql = "INSERT INTO purchaserequest ( `name`,`state`,`location`,`place`,`vendor`,`price`,`department`,`equipment`,`qty`) VALUES 
 
-        ('$name','$state','$location','$place','$product','$qty','$vendor')";
+        ('$name','$state','$location','$place','$vendor','$price','$department','$productdesc','$qty')";
 
         // echo $sql;
 
         if (mysqli_query($conn, $sql)) {
             echo '<script>alert("New record created successfully")</script>';
-            // echo "New record created successfully";
+            echo "$sql";
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
@@ -162,116 +165,99 @@ if (strlen($_SESSION['login']) == "") {
                 </div>
 
 
-
-
-
-
-                <div class="grid gap-6 mb-6 lg:grid-cols-3 rounded-2xl">
-
-
-                    <div>
-
-                        <div class='mb-6'>
-
-                            <label for="state" class="block mb-2 text-sm font-medium text-gray-900 ">State
-
-                            </label>
-                            <select name="state" id="state"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 ">
-                                <option value=" ">Choose a State</option>
-                                <option value="Tamil Nadu">
-                                    Tamil Nadu</option>
-                                <option value="Karanataka">
-                                    Karanataka</option>
-                                <option value="Kerala">
-                                    Kerala
-                                </option>
-
-                                <option value="Cochin">
-                                    Cochin</option>
-
-
-
-                            </select>
-
-
-                        </div>
-                    </div>
-
-
-                    <div class='mb-6'>
-
-                        <label for="location" class="block mb-2 text-sm font-medium text-gray-900 ">Location
-
-                        </label>
-                        <select name="location" id="location"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 ">
-                            <option value="">Select Location</option>
-
-                            <option value="Chennai">
-                                Chennai</option>
-                            <option value="Bangalore">
-                                Bangalore</option>
-                            <option value="Hyderabad">
-                                Hyderabad</option>
-
-                            <option value="Cochin">
-                                Cochin</option>
-
-                        </select>
-
-
-                    </div>
-
-                    <div class='mb-6'>
-
-                        <label for="place" class="block mb-2 text-sm font-medium text-gray-900 ">Place
-
-                        </label>
-                        <select name="place" id="place"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 ">
-                            <option value="">Select Place</option>
-
-                            <option value="Chennai">
-                                Chennai</option>
-                            <option value="Bangalore">
-                                Bangalore</option>
-                            <option value="Hyderabad">
-                                Hyderabad</option>
-
-                            <option value="Cochin">
-                                Cochin</option>
-
-                        </select>
-
-
-                    </div>
-                </div>
-
-
-
-
-
             </div>
+
+
 
             <div class="grid gap-6 mb-6 lg:grid-cols-3 rounded-2xl">
 
+
                 <div>
-                    <label for="product" class="block mb-2 text-sm font-medium text-gray-900 ">Product_description
+
+                    <div class='mb-6'>
+
+                        <label for="state" class="block mb-2 text-sm font-medium text-gray-900 ">State
+
+                        </label>
+                        <select name="state" id="state"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 ">
+                            <option value=" ">Choose a State</option>
+                            <option value="Tamil Nadu">
+                                Tamil Nadu</option>
+                            <option value="Karanataka">
+                                Karanataka</option>
+                            <option value="Kerala">
+                                Kerala
+                            </option>
+
+                            <option value="Cochin">
+                                Cochin</option>
+
+
+
+                        </select>
+
+
+                    </div>
+                </div>
+
+
+                <div class='mb-6'>
+
+                    <label for="location" class="block mb-2 text-sm font-medium text-gray-900 ">Location
 
                     </label>
-                    <input type="text" id="productdesc" name="product"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
-                        placeholder="John" required>
-                </div>
-                <div>
-                    <label for="qty" class="block mb-2 text-sm font-medium text-gray-900 ">Qty
-                    </label>
+                    <select name="location" id="location"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 ">
+                        <option value="">Select Location</option>
 
-                    <input type="number" id="qty" name="qty"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
-                        placeholder="123-45-678" required>
+                        <option value="Chennai">
+                            Chennai</option>
+                        <option value="Bangalore">
+                            Bangalore</option>
+                        <option value="Hyderabad">
+                            Hyderabad</option>
+
+                        <option value="Cochin">
+                            Cochin</option>
+
+                    </select>
+
+
                 </div>
+
+                <div class='mb-6'>
+
+                    <label for="place" class="block mb-2 text-sm font-medium text-gray-900 ">Place
+
+                    </label>
+                    <select name="place" id="place"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 ">
+                        <option value="">Select Place</option>
+
+                        <option value="Chennai">
+                            Chennai</option>
+                        <option value="Bangalore">
+                            Bangalore</option>
+                        <option value="Hyderabad">
+                            Hyderabad</option>
+
+                        <option value="Cochin">
+                            Cochin</option>
+
+                    </select>
+
+
+                </div>
+            </div>
+
+
+
+
+
+
+
+            <div class="grid gap-6 mb-6 lg:grid-cols-3 rounded-2xl">
                 <div>
                     <label for="vendor" class="block mb-2 text-sm font-medium text-gray-900 ">Vendor List
                     </label>
@@ -293,7 +279,7 @@ if (strlen($_SESSION['login']) == "") {
                         ?>
 
 
-                        <select name="state" required="required" value="<?php'$vendorname'?>"> 
+                        <select name="state" required="required" value="<?php'$vendorname'?>">
 
 
 
@@ -302,6 +288,53 @@ if (strlen($_SESSION['login']) == "") {
 
 
                     </select>
+                </div>
+
+                <div>
+
+                    <label for="price" class="block mb-2 text-sm font-medium text-gray-900 ">Price
+                    </label>
+                    <input type="number" id="price" name="price"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
+                        placeholder="Enter the Price Of product/s" required>
+
+
+                </div>
+                <div>
+
+                    <label for="department" class="block mb-2 text-sm font-medium text-gray-900 ">Deparment Name
+                    </label>
+                    <input type="text" id="department" name="department"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
+                        placeholder="Enter the Deparment Name" required>
+
+
+                </div>
+            </div>
+
+
+
+
+            <div class="grid gap-6 lg:grid-cols-3 rounded-2xl">
+
+                <div>
+
+                    <label for="product" class="block mb-2 text-sm font-medium text-gray-900 ">Product_Description
+
+                    </label>
+                    <input type="text" id="product" name="productdesc"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
+                        placeholder="Enter the Product Name" required>
+
+
+                </div>
+                <div>
+                    <label for="qty" class="block mb-2 text-sm font-medium text-gray-900 ">Qty
+                    </label>
+
+                    <input type="number" id="qty" name="qty"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
+                        placeholder="123-45-678" required>
                 </div>
 
             </div>
@@ -438,7 +471,7 @@ if (strlen($_SESSION['login']) == "") {
 
 
 
-            <div class="grid gap-4 place-content-center">
+            <div class="pt-10  grid gap-4 place-content-center">
                 <button type="submit"
                     class="text-white bg-pink-500 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "
                     name="submit">Save</button>

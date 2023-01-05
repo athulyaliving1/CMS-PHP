@@ -54,15 +54,7 @@ if (isset($_POST['rejected'])) {
         <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
 
             <div>
-                <button id="dropdownRadioButton" data-dropdown-toggle="dropdownRadio" class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
-                    <svg class="mr-2 w-4 h-4 text-gray-400" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
-                    </svg>
-                    Last 30 days
-                    <svg class="ml-2 w-3 h-3" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                </button>
+                
 
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -80,11 +72,17 @@ if (isset($_POST['rejected'])) {
                             <th scope="col" class="py-3 px-6">
                                 location
                             </th>
+                            <th scope="col" class="py-3 px-6">
+                                Department
+                            </th>
                             <th scope="col" class="py-3 px-10">
                                 place
                             </th>
                             <th scope="col" class="py-3 px-10">
                                 product
+                            </th>
+                            <th scope="col" class="py-3 px-10">
+                                price
                             </th>
                             <th scope="col" class="py-3 px-10">
                                 qty
@@ -191,10 +189,16 @@ if (isset($_POST['rejected'])) {
                                         <?php echo htmlentities($row['location']); ?>
                                     </td>
                                     <td class="py-4 px-6">
+                                        <?php echo htmlentities($row['department']); ?>
+                                    </td>
+                                    <td class="py-4 px-6">
                                         <?php echo htmlentities($row['place']); ?>
                                     </td>
                                     <td class="py-4 px-6">
-                                        <?php echo htmlentities($row['product']); ?>
+                                        <?php echo htmlentities($row['equipment']); ?>
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <?php echo htmlentities($row['price']); ?>
                                     </td>
                                     <td class="py-4 px-6">
                                         <?php echo htmlentities($row['qty']); ?>
@@ -202,6 +206,8 @@ if (isset($_POST['rejected'])) {
                                     <td class="py-4 px-6">
                                         <?php echo htmlentities($row['vendor']); ?>
                                     </td>
+                                    
+                                    
 
                                     <td class="py-4">
                                         <form method="post" action="">
