@@ -62,65 +62,66 @@ if (strlen($_SESSION['login']) == "") {
     <title>CMS | User Register Requirement</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                },
-                screens: {
-                    ss: "320px",
-                    // => @media (min-width: 640px) { ... }
-
-                    sm: "375px",
-                    sl: "425px",
-
-                    md: "768px",
-                    // => @media (min-width: 768px) { ... }
-
-                    lg: "1024px",
-                    // => @media (min-width: 1024px) { ... }
-
-                    xl: "1280px",
-                    // => @media (min-width: 1280px) { ... }
-
-                    desktop: "1440px",
-                    // => @media (min-width: 1536px) { ... }
+    tailwind.config = {
+        theme: {
+            extend: {
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
                 },
             },
-            container: {
-                padding: {
-                    DEFAULT: "1rem",
-                    sm: "2rem",
-                    lg: "4rem",
-                    xl: "5rem",
-                    "2xl": "6rem",
-                },
+            screens: {
+                ss: "320px",
+                // => @media (min-width: 640px) { ... }
+
+                sm: "375px",
+                sl: "425px",
+
+                md: "768px",
+                // => @media (min-width: 768px) { ... }
+
+                lg: "1024px",
+                // => @media (min-width: 1024px) { ... }
+
+                xl: "1280px",
+                // => @media (min-width: 1280px) { ... }
+
+                desktop: "1440px",
+                // => @media (min-width: 1536px) { ... }
             },
-        }
+        },
+        container: {
+            padding: {
+                DEFAULT: "1rem",
+                sm: "2rem",
+                lg: "4rem",
+                xl: "5rem",
+                "2xl": "6rem",
+            },
+        },
+    }
     </script>
 
     <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v5.15.1/css/pro.min.css" />
 
     <script>
-        function getCat(val) {
-            //alert('val');
+    function getCat(val) {
+        //alert('val');
 
-            $.ajax({
-                type: "POST",
-                url: "getsubcat.php",
-                data: 'catid=' + val,
-                success: function(data) {
-                    $("#subcategory").html(data);
+        $.ajax({
+            type: "POST",
+            url: "getsubcat.php",
+            data: 'catid=' + val,
+            success: function(data) {
+                $("#subcategory").html(data);
 
-                }
-            });
-        }
+            }
+        });
+    }
     </script>
 
 </head>
@@ -145,25 +146,33 @@ if (strlen($_SESSION['login']) == "") {
                 <div>
                     <label for="idnumber" class="block mb-2 text-sm font-medium text-gray-900 ">id
                         Number</label>
-                    <input value="<?php echo $_GET['id']; ?>" type="number" id="idnumber" name="id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 " disabled placeholder="John" required>
+                    <input value="<?php echo $_GET['id']; ?>" type="number" id="idnumber" name="id"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
+                        disabled placeholder="John" required>
                 </div>
 
                 <div>
                     <label for="refnumber" class="block mb-2 text-sm font-medium text-gray-900 ">Reference
                         Number</label>
-                    <input type="text" id="refnumber" name="refno" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 " placeholder="John" required>
+                    <input type="text" id="refnumber" name="refno"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
+                        placeholder="John" required>
                 </div>
                 <div>
                     <label for="pay" class="block mb-2 text-sm font-medium text-gray-900 ">payment term
                     </label>
-                    <input type="text" id="pay" name="paymentterms" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 " placeholder="Doe" required>
+                    <input type="text" id="pay" name="paymentterms"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
+                        placeholder="Doe" required>
                 </div>
                 <div>
 
                     <label for="myFile" class="block mb-2 text-sm font-medium text-gray-900 ">
                         File Upload
                     </label>
-                    <input type="file" for="filename" id="myFile" name="compfile" accept=".pdf" value="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 " placeholder="123-45-678" required>
+                    <input type="file" for="filename" id="myFile" name="compfile" accept=".pdf" value=""
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
+                        placeholder="123-45-678" required>
 
 
                 </div>
@@ -171,7 +180,9 @@ if (strlen($_SESSION['login']) == "") {
 
 
                 <div class="grid gap-4 place-content-center">
-                    <button type="submit" class="text-white bg-pink-500 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center " name="submit">Save</button>
+                    <button type="submit"
+                        class="text-white bg-pink-500 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "
+                        name="submit">Save</button>
 
                 </div>
 

@@ -10,11 +10,13 @@ if (!$conn) {
     echo "Connection successful";
 }
 
+
+
+
+
+
+
 ?>
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,11 +24,15 @@ if (!$conn) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
+
 <body>
+
+
     <?php
 
     include("include/header.php");
@@ -37,21 +43,7 @@ if (!$conn) {
         <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
 
             <div>
-                <button id="dropdownRadioButton" data-dropdown-toggle="dropdownRadio"
-                    class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-                    type="button">
-                    <svg class="mr-2 w-4 h-4 text-gray-400" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
-                            clip-rule="evenodd"></path>
-                    </svg>
-                    Last 30 days
-                    <svg class="ml-2 w-3 h-3" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                </button>
+
 
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -61,17 +53,34 @@ if (!$conn) {
                                 id
                             </th>
                             <th scope="col" class="py-3 px-6">
-                                Ref No
+                                name
                             </th>
                             <th scope="col" class="py-3 px-6">
-                                Transaction ID
+                                state
                             </th>
                             <th scope="col" class="py-3 px-6">
-                                Amount
+                                location
                             </th>
-
+                            <th scope="col" class="py-3 px-6">
+                                Department
+                            </th>
+                            <th scope="col" class="py-3 px-10">
+                                place
+                            </th>
+                            <th scope="col" class="py-3 px-10">
+                                product
+                            </th>
+                            <th scope="col" class="py-3 px-10">
+                                price
+                            </th>
+                            <th scope="col" class="py-3 px-10">
+                                qty
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                vendor
+                            </th>
                             <th scope="col" class="col-2  py-3 px-6">
-                                Mode
+                                status
                             </th>
 
                         </tr>
@@ -84,78 +93,59 @@ if (!$conn) {
                     <tbody>
                         <?php
 
-                        $limit = 5;
-
-                        // query to retrieve all rows from the table Countries
-
-                        $getQuery = "SELECT * FROM paymentdetails ";
-
-
-                        // get the result
-
-                        $result = mysqli_query($conn, $getQuery);
-
-                        $total_rows = mysqli_num_rows($result);
-
-                        // get the required number of pages
-
-                        $total_pages = ceil($total_rows / $limit);
-
-                        // update the active page number
-
-                        if (!isset($_GET['page'])) {
-
-                            $page_number = 1;
-                        } else {
-
-                            $page_number = $_GET['page'];
-                        }
-
-                        // get the initial page number
-
-                        $initial_page = ($page_number - 1) * $limit;
-
-                        // get data of selected rows per page    
-
-                        $getQuery = "SELECT * FROM paymentdetails  LIMIT " . $initial_page . ',' . $limit;
-
-                        $result = mysqli_query($conn, $getQuery);
-
-                        //display the retrieved result on the webpage  
-
-
-
-
-
-
-
-                        while ($row = mysqli_fetch_array($result)) {
-
-                            // echo $row['id'] . ' ' . $row['vendorname'] . '</br>';
-
 
                         ?>
+
+
+                        <?php
+                        $selectQuery = "SELECT * FROM purchaserequest ";
+                        $sql = mysqli_query($conn, $selectQuery);
+                        $count = mysqli_num_rows($sql);
+
+                        if ($count > 0) {
+                            while ($row = mysqli_fetch_array($sql)) {
+                        ?>
+                        <tr>
+
+
+
+
 
                         <tr class="bg-white border-b hover:bg-gray-50 ">
 
 
 
                             <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
-                                <?php echo htmlentities($row['id']); ?>
+                                <?php echo htmlentities($row['id']);
+                                $kk = $row['id'];?>
                             </th>
                             <td class="py-4 px-6">
-                                <?php echo htmlentities($row['refno']); ?>
+                                <?php echo htmlentities($row['name']); ?>
                             </td>
                             <td class="py-4 px-6">
-                                <?php echo htmlentities($row['transcationid']); ?>
+                                <?php echo htmlentities($row['state']); ?>
                             </td>
                             <td class="py-4 px-6">
-                                <?php echo htmlentities($row['amount']); ?>
+                                <?php echo htmlentities($row['location']); ?>
                             </td>
                             <td class="py-4 px-6">
-                                <?php echo htmlentities($row['mode']); ?>
+                                <?php echo htmlentities($row['department']); ?>
                             </td>
-
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['place']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['equipment']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['price']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['qty']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['vendor']); ?>
+                            </td>
 
 
 
@@ -234,9 +224,12 @@ if (!$conn) {
                                                                         <h2
                                                                             class="font-medium title-font text-gray-900 mb-1 text-xl">
                                                                             Purchase Request</h2>
-                                                                        <p class="leading-relaxed">VHS cornhole pop-up,
-                                                                            try-hard 8-bit iceland helvetica. Kinfolk
-                                                                            bespoke try-hard cliche palo santo offal.
+
+
+
+
+                                                                        <p class="leading-relaxed">
+                                                                            <?php echo $row['created_at'];  ?>
                                                                         </p>
                                                                     </div>
                                                                 </div>
@@ -255,14 +248,26 @@ if (!$conn) {
                                                                 <div
                                                                     class="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
 
+
+
+
+
+
                                                                     <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
                                                                         <h2
                                                                             class="font-medium title-font text-gray-900 mb-1 text-xl">
                                                                             Admin Approval</h2>
-                                                                        <p class="leading-relaxed">VHS cornhole pop-up,
-                                                                            try-hard 8-bit iceland helvetica. Kinfolk
-                                                                            bespoke try-hard cliche palo santo offal.
+
+
+
+                                                                        <p class="leading-relaxed">
+                                                                            <?php echo $row['updated_at'];  ?>
+
                                                                         </p>
+
+
+
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -284,10 +289,27 @@ if (!$conn) {
                                                                         <h2
                                                                             class="font-medium title-font text-gray-900 mb-1 text-xl">
                                                                             P.O Created</h2>
-                                                                        <p class="leading-relaxed">VHS cornhole pop-up,
-                                                                            try-hard 8-bit iceland helvetica. Kinfolk
-                                                                            bespoke try-hard cliche palo santo offal.
+                                                                        <?php
+
+                                                                           $rrid = $_GET["id"];
+
+                                                                            
+
+
+                                                                        
+                                                                        $datasql = mysqli_query($conn, "SELECT po.id,po.created_at_po as po_created,po.updated_at_po as payment_date FROM purchaserequest pr join purchaseorder po on pr.id=po.id  where po.id=".$kk.";");
+
+                                                                            $rw = mysqli_fetch_assoc($datasql);
+
+                                                                          
+                                                                         ?>
+
+                                                                        <p class="leading-relaxed">
+
+
+                                                                            <?php echo $rw['po_created']; ?>
                                                                         </p>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -309,9 +331,8 @@ if (!$conn) {
                                                                         <h2
                                                                             class="font-medium title-font text-gray-900 mb-1 text-xl">
                                                                             Payment Action</h2>
-                                                                        <p class="leading-relaxed">VHS cornhole pop-up,
-                                                                            try-hard 8-bit iceland helvetica. Kinfolk
-                                                                            bespoke try-hard cliche palo santo offal.
+                                                                        <p class="leading-relaxed">
+                                                                            <?php echo $rw['payment_date']; ?>
                                                                         </p>
                                                                     </div>
                                                                 </div>
@@ -326,13 +347,13 @@ if (!$conn) {
                                 </div>
 
                             </td>
-
                         </tr>
                         <?php
-
-
-
-                        } ?>
+                            }
+                        } else {
+                            echo "No Record";
+                        }
+                        ?>
 
                     </tbody>
 
@@ -343,21 +364,7 @@ if (!$conn) {
 
                     <div class="flex justify-center">
                         <div class="flex items-center space-x-5">
-                            <?php
-                            // show page number with link   
 
-
-
-
-
-                            for ($page_number = 1; $page_number <= $total_pages; $page_number++) {
-
-                                echo '<a href = "Purchasestatus.php?page=' . $page_number . '">' . $page_number . ' </a>';
-                            }
-
-
-
-                            ?>
                         </div>
 
                     </div>
