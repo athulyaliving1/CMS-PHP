@@ -4,15 +4,13 @@ error_reporting(1);
 include('includes/config.php');
 $conn = mysqli_connect('localhost', 'root', '', 'athul9z1_cms');
 // Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-} else {
-    echo "Connection successful";
-}
+// if (!$conn) {
+//     die("Connection failed: " . mysqli_connect_error());
+// } else {
+//     echo "Connection successful";
+// }
 
 ?>
-
-
 
 
 <!DOCTYPE html>
@@ -36,12 +34,18 @@ if (!$conn) {
         <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
 
             <div>
-                <button id="dropdownRadioButton" data-dropdown-toggle="dropdownRadio" class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
-                    <svg class="mr-2 w-4 h-4 text-gray-400" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                <button id="dropdownRadioButton" data-dropdown-toggle="dropdownRadio"
+                    class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                    type="button">
+                    <svg class="mr-2 w-4 h-4 text-gray-400" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
+                            clip-rule="evenodd"></path>
                     </svg>
                     Last 30 days
-                    <svg class="ml-2 w-3 h-3" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="ml-2 w-3 h-3" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </button>
@@ -147,55 +151,56 @@ if (!$conn) {
 
                         ?>
 
-                            <tr class="bg-white border-b hover:bg-gray-50 ">
+                        <tr class="bg-white border-b hover:bg-gray-50 ">
 
 
 
-                                <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
-                                    <?php echo htmlentities($row['id']); ?>
-                                </th>
+                            <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
+                                <?php echo htmlentities($row['id']); ?>
+                            </th>
 
-                                <td class="py-4 px-6">
-                                    <?php echo htmlentities($row['name']); ?>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <?php echo htmlentities($row['state']); ?>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <?php echo htmlentities($row['location']); ?>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <?php echo htmlentities($row['department']); ?>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <?php echo htmlentities($row['place']); ?>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <?php echo htmlentities($row['equipment']); ?>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <?php echo htmlentities($row['price']); ?>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <?php echo htmlentities($row['qty']); ?>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <?php echo htmlentities($row['vendor']); ?>
-                                </td>
-
-
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['name']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['state']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['location']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['department']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['place']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['equipment']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['price']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['qty']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['vendor']); ?>
+                            </td>
 
 
-                                <td class="flex items-center py-4 px-6 space-x-3 place-content-center ">
-                                    <div>
 
-                                        <a href="createpo.php?id=<?php echo $row['id']; ?>   " class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-blue-600 border border-blue-700 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">create
-                                            P.O</a>
-                                    </div>
 
-                                </td>
+                            <td class="flex items-center py-4 px-6 space-x-3 place-content-center ">
+                                <div>
 
-                            </tr>
+                                    <a href="createpo.php?id=<?php echo $row['id']; ?>   "
+                                        class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-blue-600 border border-blue-700 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">create
+                                        P.O</a>
+                                </div>
+
+                            </td>
+
+                        </tr>
                         <?php
 
 
@@ -263,27 +268,27 @@ if (!$conn) {
                 </div>
             </div>
             <script type="text/javascript">
-                $(".remove").click(function() {
-                    var id = $(this).parents("tr").attr("id");
+            $(".remove").click(function() {
+                var id = $(this).parents("tr").attr("id");
 
 
-                    if (confirm('Are you sure to remove this record ?')) {
-                        $.ajax({
-                            url: '/vendorlist.php',
-                            type: 'GET',
-                            data: {
-                                id: id
-                            },
-                            error: function() {
-                                alert('Something is wrong');
-                            },
-                            success: function(data) {
-                                $("#" + id).remove();
-                                alert("Record removed successfully");
-                            }
-                        });
-                    }
-                });
+                if (confirm('Are you sure to remove this record ?')) {
+                    $.ajax({
+                        url: '/vendorlist.php',
+                        type: 'GET',
+                        data: {
+                            id: id
+                        },
+                        error: function() {
+                            alert('Something is wrong');
+                        },
+                        success: function(data) {
+                            $("#" + id).remove();
+                            alert("Record removed successfully");
+                        }
+                    });
+                }
+            });
             </script>
 
             <script src="https://unpkg.com/flowbite@1.5.5/dist/flowbite.js"></script>

@@ -31,7 +31,7 @@
 
 <body>
 
-    <div class="w-60 h-full container mx-auto  shadow-md bg-white px-1 absolute" id="sidenavExample">
+    <div class="w-60 h-screen container mx-auto   shadow-md bg-white px-1 absolute" id="sidenavExample">
         <ul class="relative">
             <li class="relative" id="sidenavEx1">
                 <a class="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out cursor-pointer"
@@ -63,11 +63,7 @@
                             class="flex items-center text-xs py-4 pl-12 pr-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out"
                             data-mdb-ripple="true" data-mdb-ripple-color="dark">VendorRegistration</a>
                     </li>
-                    <li class="relative">
-                        <a href="closed-complaint.php"
-                            class="flex items-center text-xs py-4 pl-12 pr-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out"
-                            data-mdb-ripple="true" data-mdb-ripple-color="dark"> Closed Complaints</a>
-                    </li>
+
                 </ul>
             </li>
 
@@ -140,15 +136,16 @@
                             data-mdb-ripple="true" data-mdb-ripple-color="dark">Admin Dashboard</a>
                     </li>
                     <li class="relative">
-                        <a href="#!"
+                        <a href="vendorlist.php"
                             class="flex items-center text-xs py-4 pl-12 pr-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out"
-                            data-mdb-ripple="true" data-mdb-ripple-color="dark">Pending Purchases</a>
+                            data-mdb-ripple="true" data-mdb-ripple-color="dark">Vendorlist</a>
                     </li>
                     <li class="relative">
-                        <a href="#!"
+                        <a href="accountsummary.php"
                             class="flex items-center text-xs py-4 pl-12 pr-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out"
-                            data-mdb-ripple="true" data-mdb-ripple-color="dark">Closed Purchases</a>
+                            data-mdb-ripple="true" data-mdb-ripple-color="dark">Account Summary</a>
                     </li>
+
                 </ul>
             </li>
             <li class="relative" id="sidenavEx3">
@@ -179,13 +176,14 @@
                     <li class="relative">
                         <a href="#!"
                             class="flex items-center text-xs py-4 pl-12 pr-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out"
-                            data-mdb-ripple="true" data-mdb-ripple-color="dark"> Pending Requirements</a>
+                            data-mdb-ripple="true" data-mdb-ripple-color="dark">Vendorlist</a>
                     </li>
                     <li class="relative">
-                        <a href="#!"
+                        <a href="accountsummary.php"
                             class="flex items-center text-xs py-4 pl-12 pr-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out"
-                            data-mdb-ripple="true" data-mdb-ripple-color="dark"> Closed Requirements</a>
+                            data-mdb-ripple="true" data-mdb-ripple-color="dark">Account Summary</a>
                     </li>
+
                 </ul>
             </li>
         </ul>

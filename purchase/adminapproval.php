@@ -4,11 +4,11 @@ error_reporting(1);
 include('includes/config.php');
 $conn = mysqli_connect('localhost', 'root', '', 'athul9z1_cms');
 // Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-} else {
-    echo "Connection successful";
-}
+// if (!$conn) {
+//     die("Connection failed: " . mysqli_connect_error());
+// } else {
+//     echo "Connection successful";
+// }
 
 
 
@@ -54,7 +54,7 @@ if (isset($_POST['rejected'])) {
         <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
 
             <div>
-                
+
 
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -166,66 +166,69 @@ if (isset($_POST['rejected'])) {
                         if ($count > 0) {
                             while ($row = mysqli_fetch_array($sql)) {
                         ?>
-                                <tr>
+                        <tr>
 
 
 
 
 
-                                <tr class="bg-white border-b hover:bg-gray-50 ">
+                        <tr class="bg-white border-b hover:bg-gray-50 ">
 
 
 
-                                    <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
-                                        <?php echo htmlentities($row['id']); ?>
-                                    </th>
-                                    <td class="py-4 px-6">
-                                        <?php echo htmlentities($row['name']); ?>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <?php echo htmlentities($row['state']); ?>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <?php echo htmlentities($row['location']); ?>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <?php echo htmlentities($row['department']); ?>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <?php echo htmlentities($row['place']); ?>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <?php echo htmlentities($row['equipment']); ?>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <?php echo htmlentities($row['price']); ?>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <?php echo htmlentities($row['qty']); ?>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <?php echo htmlentities($row['vendor']); ?>
-                                    </td>
-                                    
-                                    
-
-                                    <td class="py-4">
-                                        <form method="post" action="">
-                                            <input type="hidden" name="row_id" value="<?= $row['id']; ?>" />
-                                            <button type="submit" name="approved" class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-green-600 border border-green-500 rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                                Approve
-                                            </button>
+                            <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
+                                <?php echo htmlentities($row['id']); ?>
+                            </th>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['name']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['state']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['location']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['department']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['place']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['equipment']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['price']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['qty']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['vendor']); ?>
+                            </td>
 
 
-                                        </form>
-                                        <form method="post" action="">
+
+                            <td class="py-4">
+                                <form method="post" action="">
+                                    <input type="hidden" name="row_id" value="<?= $row['id']; ?>" />
+                                    <button type="submit" name="approved"
+                                        class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-green-600 border border-green-500 rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                        Approve
+                                    </button>
 
 
-                                            <input type="hidden" name="row_id" value="<?= $row['id']; ?>" />
-                                            <button class="inline-flex items-center justify-center px-6 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-red-500 border border-red-500 rounded-md shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500" type="submit" name="rejected">Reject</button>
-                                        </form>
-                                    </td>
-                                </tr>
+                                </form>
+                                <form method="post" action="">
+
+
+                                    <input type="hidden" name="row_id" value="<?= $row['id']; ?>" />
+                                    <button
+                                        class="inline-flex items-center justify-center px-6 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-red-500 border border-red-500 rounded-md shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+                                        type="submit" name="rejected">Reject</button>
+                                </form>
+                            </td>
+                        </tr>
                         <?php
                             }
                         } else {
@@ -294,27 +297,27 @@ if (isset($_POST['rejected'])) {
                 </div>
             </div>
             <script type="text/javascript">
-                $(".remove").click(function() {
-                    var id = $(this).parents("tr").attr("id");
+            $(".remove").click(function() {
+                var id = $(this).parents("tr").attr("id");
 
 
-                    if (confirm('Are you sure to remove this record ?')) {
-                        $.ajax({
-                            url: '/vendorlist.php',
-                            type: 'GET',
-                            data: {
-                                id: id
-                            },
-                            error: function() {
-                                alert('Something is wrong');
-                            },
-                            success: function(data) {
-                                $("#" + id).remove();
-                                alert("Record removed successfully");
-                            }
-                        });
-                    }
-                });
+                if (confirm('Are you sure to remove this record ?')) {
+                    $.ajax({
+                        url: '/vendorlist.php',
+                        type: 'GET',
+                        data: {
+                            id: id
+                        },
+                        error: function() {
+                            alert('Something is wrong');
+                        },
+                        success: function(data) {
+                            $("#" + id).remove();
+                            alert("Record removed successfully");
+                        }
+                    });
+                }
+            });
             </script>
 
             <script src="https://unpkg.com/flowbite@1.5.5/dist/flowbite.js"></script>

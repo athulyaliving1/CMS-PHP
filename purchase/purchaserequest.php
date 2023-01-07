@@ -4,12 +4,12 @@ error_reporting(1);
 include('includes/config.php');
 $conn = mysqli_connect('localhost', 'root', '', 'athul9z1_cms');
 // Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-} else {
-    echo "Connection successful";
+// if (!$conn) {
+//     die("Connection failed: " . mysqli_connect_error());
+// } else {
+//     echo "Connection successful";
 
-}
+// }
 
 if (strlen($_SESSION['login']) == "") {
     header('location:index.php');
@@ -43,7 +43,8 @@ if (strlen($_SESSION['login']) == "") {
 
         if (mysqli_query($conn, $sql)) {
             echo '<script>alert("New record created successfully")</script>';
-            echo "$sql";
+
+            // echo "$sql";
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
@@ -258,6 +259,21 @@ if (strlen($_SESSION['login']) == "") {
 
 
             <div class="grid gap-6 mb-6 lg:grid-cols-3 rounded-2xl">
+
+
+                <div>
+
+                    <label for="department" class="block mb-2 text-sm font-medium text-gray-900 ">Deparment Name
+                    </label>
+                    <input type="text" id="department" name="department"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
+                        placeholder="Enter the Deparment Name" required>
+
+
+                </div>
+
+
+
                 <div>
                     <label for="vendor" class="block mb-2 text-sm font-medium text-gray-900 ">Vendor List
                     </label>
@@ -290,6 +306,7 @@ if (strlen($_SESSION['login']) == "") {
                     </select>
                 </div>
 
+
                 <div>
 
                     <label for="price" class="block mb-2 text-sm font-medium text-gray-900 ">Price
@@ -297,16 +314,6 @@ if (strlen($_SESSION['login']) == "") {
                     <input type="number" id="price" name="price"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
                         placeholder="Enter the Price Of product/s" required>
-
-
-                </div>
-                <div>
-
-                    <label for="department" class="block mb-2 text-sm font-medium text-gray-900 ">Deparment Name
-                    </label>
-                    <input type="text" id="department" name="department"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
-                        placeholder="Enter the Deparment Name" required>
 
 
                 </div>

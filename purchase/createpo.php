@@ -3,11 +3,11 @@ session_start();
 error_reporting(0);
 include('include/config.php');
 
-if (!$con) {
-    die("Connection failed: " . mysqli_connect_error());
-} else {
-    echo "Connection successful";
-}
+// if (!$con) {
+//     die("Connection failed: " . mysqli_connect_error());
+// } else {
+//     echo "Connection successful";
+// }
 
 
 
@@ -31,13 +31,13 @@ if (strlen($_SESSION['login']) == "") {
 
         move_uploaded_file($_FILES["reqfile"]["tmp_name"], "reqdocs/" . $_FILES["reqfile"]["name"]);
         $sql =  "insert into purchaseorder(id,refno,paymentterms,compfile) values('$tempid','$refno','$paymentterms','$compfile')";
-        echo $sql;
-        echo $tempid;
+        // echo $sql;
+        // echo $tempid;
 
         if (mysqli_query($con, $sql)) {
 
             echo '<script>alert("New record created successfully")</script>';
-            echo "New record created successfully";
+            // echo "New record created successfully";
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($con);
         }

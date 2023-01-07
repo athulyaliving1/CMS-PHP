@@ -4,11 +4,11 @@ error_reporting(1);
 include('includes/config.php');
 $conn = mysqli_connect('localhost', 'root', '', 'athul9z1_cms');
 // Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-} else {
-    echo "Connection successful";
-}
+// if (!$conn) {
+//     die("Connection failed: " . mysqli_connect_error());
+// } else {
+//     echo "Connection successful";
+// }
 
 
 
@@ -187,8 +187,8 @@ if (!$conn) {
                                                     x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                                                     class="inline-block w-full max-w-xl p-8 my-20 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl 2xl:max-w-2xl">
                                                     <div class="flex items-center justify-between space-x-4">
-                                                        <h1 class="text-xl font-medium text-gray-800 ">Invite team
-                                                            memebr</h1>
+                                                        <h1 class="text-xl font-medium text-gray-800 ">Purchase Order
+                                                            Summary</h1>
 
                                                         <button @click="modelOpen = false"
                                                             class="text-gray-600 focus:outline-none hover:text-gray-700">
@@ -202,7 +202,8 @@ if (!$conn) {
                                                     </div>
 
                                                     <p class="mt-2 text-sm text-gray-500 ">
-                                                        Add your teammate to your team and start work to get things done
+                                                        Vestibulum ac diam sit amet quam vehicula elementum sed sit amet
+                                                        dui.
                                                     </p>
                                                     <section class="text-gray-600 body-font">
                                                         <div class="container px-5 py-24 mx-auto flex flex-wrap">
@@ -256,11 +257,12 @@ if (!$conn) {
                                                                     <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
                                                                         <h2
                                                                             class="font-medium title-font text-gray-900 mb-1 text-xl">
-                                                                            Admin Approval</h2>
+                                                                            Admin Action</h2>
 
 
 
                                                                         <p class="leading-relaxed">
+                                                                            <?php echo $row['status'];  ?>
                                                                             <?php echo $row['updated_at'];  ?>
 
                                                                         </p>
@@ -330,7 +332,7 @@ if (!$conn) {
                                                                     <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
                                                                         <h2
                                                                             class="font-medium title-font text-gray-900 mb-1 text-xl">
-                                                                            Payment Action</h2>
+                                                                            Account Acknowledge</h2>
                                                                         <p class="leading-relaxed">
                                                                             <?php echo $rw['payment_date']; ?>
                                                                         </p>
