@@ -144,8 +144,8 @@ if (strlen($_SESSION['login']) == "") {
 <body>
 
     <?php
-    include("include/header.php");
-    include("include/sidebar1.php");
+     include("./header.php");
+     include("./sidebar1.php");
 
     ?>
 
@@ -182,17 +182,14 @@ if (strlen($_SESSION['login']) == "") {
                         </label>
                         <select name="state" id="state"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 ">
-                            <option value=" ">Choose a State</option>
-                            <option value="Tamil Nadu">
-                                Tamil Nadu</option>
-                            <option value="Karanataka">
-                                Karanataka</option>
-                            <option value="Kerala">
-                                Kerala
-                            </option>
-
-                            <option value="Cochin">
-                                Cochin</option>
+                            <?php $sql=mysqli_query($conn,"select id,states_name from states");
+                           while ($rw=mysqli_fetch_array($sql)) {
+  ?>
+                            <option value="<?php echo htmlentities($rw['states_name']);?>">
+                                <?php echo htmlentities($rw['states_name']);?></option>
+                            <?php
+}
+?>
 
 
 
@@ -208,20 +205,17 @@ if (strlen($_SESSION['login']) == "") {
                     <label for="location" class="block mb-2 text-sm font-medium text-gray-900 ">Location
 
                     </label>
-                    <select name="location" id="location"
+                    <select name="location"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 ">
-                        <option value="">Select Location</option>
-
-                        <option value="Chennai">
-                            Chennai</option>
-                        <option value="Bangalore">
-                            Bangalore</option>
-                        <option value="Hyderabad">
-                            Hyderabad</option>
-
-                        <option value="Cochin">
-                            Cochin</option>
-
+                        <option selected>Choose a Location</option>
+                        <?php $sql=mysqli_query($conn,"select id,name from location");
+                           while ($rw=mysqli_fetch_array($sql)) {
+  ?>
+                        <option value="<?php echo htmlentities($rw['name']);?>">
+                            <?php echo htmlentities($rw['name']);?></option>
+                        <?php
+}
+?>
                     </select>
 
 
@@ -236,15 +230,16 @@ if (strlen($_SESSION['login']) == "") {
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 ">
                         <option value="">Select Place</option>
 
-                        <option value="Chennai">
-                            Chennai</option>
-                        <option value="Bangalore">
-                            Bangalore</option>
-                        <option value="Hyderabad">
-                            Hyderabad</option>
+                        <option name="place" selected>Choose a Place</option>
+                        <?php $sql=mysqli_query($conn,"select id,place from place");
+                           while ($rw=mysqli_fetch_array($sql)) {
+  ?>
+                        <option value="<?php echo htmlentities($rw['place']);?>">
+                            <?php echo htmlentities($rw['place']);?></option>
+                        <?php
+}
+?>
 
-                        <option value="Cochin">
-                            Cochin</option>
 
                     </select>
 
@@ -265,9 +260,18 @@ if (strlen($_SESSION['login']) == "") {
 
                     <label for="department" class="block mb-2 text-sm font-medium text-gray-900 ">Deparment Name
                     </label>
-                    <input type="text" id="department" name="department"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
-                        placeholder="Enter the Deparment Name" required>
+                    <select name="department"
+                        class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 ">
+                        <option selected>Choose a Department</option>
+                        <?php $sql=mysqli_query($conn,"select id,stateName from department");
+                           while ($rw=mysqli_fetch_array($sql)) {
+  ?>
+                        <option value="<?php echo htmlentities($rw['stateName']);?>">
+                            <?php echo htmlentities($rw['stateName']);?></option>
+                        <?php
+}
+?>
+                    </select>
 
 
                 </div>
@@ -525,7 +529,7 @@ if (strlen($_SESSION['login']) == "") {
     </script>
 
 
-<script>
+    <script>
     if (window.history.replaceState) {
         window.history.replaceState(null, null, window.location.href);
     }

@@ -20,10 +20,6 @@ if (isset($_POST['acknowledge'])) {
 
 
 
-
-
-
-
 ?>
 
 
@@ -35,15 +31,55 @@ if (isset($_POST['acknowledge'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
+                },
+            },
+            screens: {
+                ss: "320px",
+                // => @media (min-width: 640px) { ... }
+
+                sm: "375px",
+                sl: "425px",
+
+                md: "768px",
+                // => @media (min-width: 768px) { ... }
+
+                lg: "1024px",
+                // => @media (min-width: 1024px) { ... }
+
+                xl: "1280px",
+                // => @media (min-width: 1280px) { ... }
+
+                desktop: "1440px",
+                // => @media (min-width: 1536px) { ... }
+            },
+        },
+        container: {
+            padding: {
+                DEFAULT: "1rem",
+                sm: "2rem",
+                lg: "4rem",
+                xl: "5rem",
+                "2xl": "6rem",
+            },
+        },
+    }
+    </script>
 </head>
 
 <body>
     <?php
 
-    include("include/header.php");
-    include("include/sidebar1.php");
+    include("../include/header.php");
+    include("./sidebar1.php");
    
 
         ?>

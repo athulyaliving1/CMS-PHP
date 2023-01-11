@@ -1,6 +1,13 @@
 <?php
 session_start();
-include('include/config.php');
+include("../include/config.php");
+$conn = mysqli_connect('localhost', 'root', '', 'athul9z1_cms');
+// Check connection
+// if (!$con) {
+//     die("Connection failed: " . mysqli_connect_error());
+// } else {
+//     echo "Connection successful";
+// }
 
 $sql = "SELECT * FROM vendorlist";
 
@@ -10,17 +17,8 @@ if (isset($_GET['del'])) {
     $id = $_GET['del'];
     mysqli_query($con, "DELETE FROM vendorlist WHERE id=$id");
     $_SESSION['message'] = "Address deleted!";
-    header('location: vendorlist.php');
+  
 }
-
-
-
-
-
-
-
-
-
 
 
 
@@ -42,50 +40,51 @@ if (isset($_GET['del'])) {
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.5/dist/flowbite.min.css" />
+
 
 
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                },
-                screens: {
-                    ss: "320px",
-                    // => @media (min-width: 640px) { ... }
-
-                    sm: "375px",
-                    sl: "425px",
-
-                    md: "768px",
-                    // => @media (min-width: 768px) { ... }
-
-                    lg: "1024px",
-                    // => @media (min-width: 1024px) { ... }
-
-                    xl: "1280px",
-                    // => @media (min-width: 1280px) { ... }
-
-                    desktop: "1440px",
-                    // => @media (min-width: 1536px) { ... }
+    tailwind.config = {
+        theme: {
+            extend: {
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
                 },
             },
-            container: {
-                padding: {
-                    DEFAULT: "1rem",
-                    sm: "2rem",
-                    lg: "4rem",
-                    xl: "5rem",
-                    "2xl": "6rem",
-                },
+            screens: {
+                ss: "320px",
+                // => @media (min-width: 640px) { ... }
+
+                sm: "375px",
+                sl: "425px",
+
+                md: "768px",
+                // => @media (min-width: 768px) { ... }
+
+                lg: "1024px",
+                // => @media (min-width: 1024px) { ... }
+
+                xl: "1280px",
+                // => @media (min-width: 1280px) { ... }
+
+                desktop: "1440px",
+                // => @media (min-width: 1536px) { ... }
             },
-        }
+        },
+        container: {
+            padding: {
+                DEFAULT: "1rem",
+                sm: "2rem",
+                lg: "4rem",
+                xl: "5rem",
+                "2xl": "6rem",
+            },
+        },
+    }
     </script>
 
     <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v5.15.1/css/pro.min.css" />
@@ -98,15 +97,15 @@ if (isset($_GET['del'])) {
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 
     <script language="JavaScript" type="text/javascript">
-        $(document).ready(function() {
-            $("a.delete").click(function(e) {
-                if (!confirm('Are you sure?')) {
-                    e.preventDefault();
-                    return false;
-                }
-                return true;
-            });
+    $(document).ready(function() {
+        $("a.delete").click(function(e) {
+            if (!confirm('Are you sure?')) {
+                e.preventDefault();
+                return false;
+            }
+            return true;
         });
+    });
     </script>
 
 
@@ -116,27 +115,19 @@ if (isset($_GET['del'])) {
 <body>
 
     <?php
-
-    include("include/header.php");
-    include("include/sidebar1.php");
+ include("../include/header.php");
+ include("./sidebar1.php");
+  
     ?>
 
     <div class="container mx-auto bg-white  p-16">
         <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
 
             <div>
-                <button id="dropdownRadioButton" data-dropdown-toggle="dropdownRadio" class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
-                    <svg class="mr-2 w-4 h-4 text-gray-400" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
-                    </svg>
-                    Last 30 days
-                    <svg class="ml-2 w-3 h-3" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                </button>
 
-                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+
+                <table class="w-full text-sm text-left text-gray-500 ">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                         <tr>
 
                             <th scope="col" class="py-3 px-6">
@@ -246,67 +237,71 @@ if (isset($_GET['del'])) {
 
                         ?>
 
-                            <tr class="bg-white border-b hover:bg-gray-50 ">
+                        <tr class="bg-white border-b hover:bg-gray-50 ">
 
 
 
-                                <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
-                                    <?php echo htmlentities($row['id']); ?>
-                                </th>
-                                <td class="py-4 px-6">
-                                    <?php echo htmlentities($row['vendorname']); ?>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <?php echo htmlentities($row['contactperson']); ?>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <?php echo htmlentities($row['gstnumber']); ?>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <?php echo htmlentities($row['pannumber']); ?>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <?php echo htmlentities($row['email']); ?>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <?php echo htmlentities($row['mobilenumber']); ?>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <?php echo htmlentities($row['accountnumber']); ?>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <?php echo htmlentities($row['ifsccode']); ?>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <?php echo htmlentities($row['address']); ?>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <?php echo htmlentities($row['department']); ?>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <?php echo htmlentities($row['state']); ?>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <?php echo htmlentities($row['location']); ?>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <?php echo htmlentities($row['place']); ?>
-                                </td>
+                            <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
+                                <?php echo htmlentities($row['id']); ?>
+                            </th>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['vendorname']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['contactperson']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['gstnumber']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['pannumber']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['email']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['mobilenumber']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['accountnumber']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['ifsccode']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['address']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['department']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['state']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['location']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['place']); ?>
+                            </td>
 
 
-                                <td class="flex items-center py-4 px-6 space-x-3 place-content-center ">
-                                    <div>
+                            <td class="flex items-center py-4 px-6 space-x-3 place-content-center ">
+                                <div>
 
 
-                                        <a href="vendorlistedit.php?edit=<?php echo $row['id']; ?>   " onclick="return checkDelete()" class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-blue-600 border border-blue-700 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Edit</a>
-                                    </div>
-                                    <div>
-                                        <button><a href="vendorlist.php?del=<?php echo $row['id']; ?>" class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-red-500 border border-red-800 rounded-md shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">Delete</a> </button>
+                                    <a href="vendorlistedit.php?edit=<?php echo $row['id']; ?>   "
+                                        onclick="return checkDelete()"
+                                        class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-blue-600 border border-blue-700 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Edit</a>
+                                </div>
+                                <div>
+                                    <button><a href="vendorlist.php?del=<?php echo $row['id']; ?>"
+                                            class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-red-500 border border-red-800 rounded-md shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">Delete</a>
+                                    </button>
 
-                                    </div>
-                                </td>
+                                </div>
+                            </td>
 
-                            </tr>
+                        </tr>
                         <?php
 
 
@@ -374,27 +369,27 @@ if (isset($_GET['del'])) {
                 </div>
             </div>
             <script type="text/javascript">
-                $(".remove").click(function() {
-                    var id = $(this).parents("tr").attr("id");
+            $(".remove").click(function() {
+                var id = $(this).parents("tr").attr("id");
 
 
-                    if (confirm('Are you sure to remove this record ?')) {
-                        $.ajax({
-                            url: '/vendorlist.php',
-                            type: 'GET',
-                            data: {
-                                id: id
-                            },
-                            error: function() {
-                                alert('Something is wrong');
-                            },
-                            success: function(data) {
-                                $("#" + id).remove();
-                                alert("Record removed successfully");
-                            }
-                        });
-                    }
-                });
+                if (confirm('Are you sure to remove this record ?')) {
+                    $.ajax({
+                        url: '/vendorlist.php',
+                        type: 'GET',
+                        data: {
+                            id: id
+                        },
+                        error: function() {
+                            alert('Something is wrong');
+                        },
+                        success: function(data) {
+                            $("#" + id).remove();
+                            alert("Record removed successfully");
+                        }
+                    });
+                }
+            });
             </script>
 
             <script src="https://unpkg.com/flowbite@1.5.5/dist/flowbite.js"></script>

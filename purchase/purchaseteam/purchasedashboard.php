@@ -21,20 +21,74 @@ $conn = mysqli_connect('localhost', 'root', '', 'athul9z1_cms');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
+
+    <script src="./vendor/jquery/jquery-3.2.1.min.js" type="text/javascript"></script>
+
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+
+
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
+                },
+            },
+            screens: {
+                ss: "320px",
+                // => @media (min-width: 640px) { ... }
+
+                sm: "375px",
+                sl: "425px",
+
+                md: "768px",
+                // => @media (min-width: 768px) { ... }
+
+                lg: "1024px",
+                // => @media (min-width: 1024px) { ... }
+
+                xl: "1280px",
+                // => @media (min-width: 1280px) { ... }
+
+                desktop: "1440px",
+                // => @media (min-width: 1536px) { ... }
+            },
+        },
+        container: {
+            padding: {
+                DEFAULT: "1rem",
+                sm: "2rem",
+                lg: "4rem",
+                xl: "5rem",
+                "2xl": "6rem",
+            },
+        },
+    }
+    </script>
+
+    <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v5.15.1/css/pro.min.css" />
 </head>
 
 <body>
     <?php
 
-    include("include/header.php");
-    include("include/sidebar1.php");
+include("./header.php");
+include("./sidebar1.php");
     ?>
 
     <div class="container mx-auto bg-white  p-16">
         <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
 
             <div>
-                
+
 
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

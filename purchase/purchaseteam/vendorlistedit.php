@@ -4,13 +4,12 @@ error_reporting(1);
 include('includes/config.php');
 $conn = mysqli_connect('localhost', 'root', '', 'athul9z1_cms');
 // Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-} else {
-    echo "Connection successful";
-}
+// if (!$conn) {
+//     die("Connection failed: " . mysqli_connect_error());
+// } else {
+//     echo "Connection successful";
+// }
 
-echo $_GET['edit'];
 
 
 if(count($_POST)>0) {
@@ -103,61 +102,63 @@ $row= mysqli_fetch_array($result);
 
 <body>
     <?php
-    include("include/header.php");
+  include("./header.php");
+  include("./sidebar1.php");
+
     ?>
     <!-- component -->
     <!-- This is an example component -->
-    <div class="bg-gray-300 w-full h-full p-10">
-        <div class="max-w-2xl mx-auto bg-white  p-16">
+    <div class="container mx-auto bg-white  p-16">
 
-            <form action="" method="post">
-                <div> <?php if(isset($message)) { echo $message; } ?> </div>
-                <div class="grid gap-6 mb-6 lg:grid-cols-2 rounded-2xl">
-                    <div>
-                        <label for="fname" class="block mb-2 text-sm font-medium text-gray-900 ">Vendor name</label>
-                        <input type="text" id="fname" name="vendorname" value="<?php echo $row['vendorname']; ?>"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
-                            placeholder="John" required>
-                    </div>
-                    <div>
-                        <label for="cname" class="block mb-2 text-sm font-medium text-gray-900 ">Contact
-                            Person</label>
-                        <input type="text" id="cname" name="contactperson" value="<?php echo $row['contactperson']; ?>"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
-                            placeholder="Doe" required>
-                    </div>
-                    <div>
-                        <label for="gstnumber" class="block mb-2 text-sm font-medium text-gray-900 ">GST-NO
-                        </label>
-                        <input type="number" id="gstnumber" name="gstnumber" value="<?php echo $row['gstnumber']; ?>"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
-                            placeholder="123-45-678" required>
-                    </div>
-                    <div>
-                        <label for="pannumber" class="block mb-2 text-sm font-medium text-gray-900 ">PAN
-                            Number
-                        </label>
-                        <input type="tel" id="pannumber" name="pannumber" value="<?php echo $row['pannumber']; ?>"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
-                            placeholder="123-45-678" required>
-                    </div>
-                    <div>
-                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 ">Email
-                            Address</label>
-                        <input type="email" id="email" name="email" value="<?php echo $row['email']; ?>"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
-                            placeholder="john.doe@company.com" required>
-                    </div>
-                    <div>
-                        <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 ">Mobile
-                            Number
-                        </label>
 
-                        <input type="tel" id="phone" name="mobilenumber" value="<?php echo $row['mobilenumber']; ?>"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
-                            placeholder="123-45-678" required>
-                    </div>
+        <form action="" method="post">
+            <div> <?php if(isset($message)) { echo $message; } ?> </div>
+            <div class="grid gap-6 mb-6 lg:grid-cols-3 rounded-2xl">
+                <div>
+                    <label for="fname" class="block mb-2 text-sm font-medium text-gray-900 ">Vendor name</label>
+                    <input type="text" id="fname" name="vendorname" value="<?php echo $row['vendorname']; ?>"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
+                        placeholder="John" required>
                 </div>
+                <div>
+                    <label for="cname" class="block mb-2 text-sm font-medium text-gray-900 ">Contact
+                        Person</label>
+                    <input type="text" id="cname" name="contactperson" value="<?php echo $row['contactperson']; ?>"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
+                        placeholder="Doe" required>
+                </div>
+                <div>
+                    <label for="gstnumber" class="block mb-2 text-sm font-medium text-gray-900 ">GST-NO
+                    </label>
+                    <input type="number" id="gstnumber" name="gstnumber" value="<?php echo $row['gstnumber']; ?>"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
+                        placeholder="123-45-678" required>
+                </div>
+                <div>
+                    <label for="pannumber" class="block mb-2 text-sm font-medium text-gray-900 ">PAN
+                        Number
+                    </label>
+                    <input type="tel" id="pannumber" name="pannumber" value="<?php echo $row['pannumber']; ?>"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
+                        placeholder="123-45-678" required>
+                </div>
+                <div>
+                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 ">Email
+                        Address</label>
+                    <input type="email" id="email" name="email" value="<?php echo $row['email']; ?>"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
+                        placeholder="john.doe@company.com" required>
+                </div>
+                <div>
+                    <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 ">Mobile
+                        Number
+                    </label>
+
+                    <input type="tel" id="phone" name="mobilenumber" value="<?php echo $row['mobilenumber']; ?>"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
+                        placeholder="123-45-678" required>
+                </div>
+
                 <div class="mb-6">
                     <label for="bank" class="block mb-2 text-sm font-medium text-gray-900 ">Bank
                         Account
@@ -288,22 +289,22 @@ $row= mysqli_fetch_array($result);
 
 
                 </div>
+            </div>
+
+
+            <div class="grid gap-4 place-content-center">
+                <button type="submit" name="submit" value="Submit"
+                    class="text-white bg-pink-500 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Save</button>
+
+            </div>
 
 
 
-                <div class="grid gap-4 place-content-center">
-                    <button type="submit" name="submit" value="Submit"
-                        class="text-white bg-pink-500 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Save</button>
 
-                </div>
+        </form>
 
 
 
-
-            </form>
-
-
-        </div>
     </div>
 
     <script>

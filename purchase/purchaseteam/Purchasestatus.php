@@ -10,6 +10,21 @@ $conn = mysqli_connect('localhost', 'root', '', 'athul9z1_cms');
 //     echo "Connection successful";
 // }
 
+
+if (isset($_POST['received'])) {
+    $appUpdateQuery = "UPDATE paymentdetails SET status='Item_Received' WHERE id='" . $_POST['row_id'] . "'";
+    $appUpdateResult = mysqli_query($conn, $appUpdateQuery);
+    $appInsertQuery = "INSERT INTO paymentdetails (id,status) VALUES ('" . $_POST['row_id'] . "','Item_Received')";
+    $appInsertResult = mysqli_query($conn, $appInsertQuery);
+}
+
+else{
+
+}
+
+
+
+
 ?>
 
 
@@ -29,8 +44,8 @@ $conn = mysqli_connect('localhost', 'root', '', 'athul9z1_cms');
 <body>
     <?php
 
-    include("include/header.php");
-    include("include/sidebar1.php");
+include("./header.php");
+include("./sidebar1.php");
     ?>
 
     <div class="container mx-auto bg-white  p-16">
@@ -58,6 +73,12 @@ $conn = mysqli_connect('localhost', 'root', '', 'athul9z1_cms');
 
                             <th scope="col" class="col-2  py-3 px-6">
                                 Mode
+                            </th>
+                            <th scope="col" class="col-2  py-3 px-6">
+                                Payment
+                            </th>
+                            <th scope="col" class="col-2 py-3 px-6">
+                                Action
                             </th>
 
                         </tr>
@@ -122,32 +143,43 @@ $conn = mysqli_connect('localhost', 'root', '', 'athul9z1_cms');
 
                         ?>
 
-                            <tr class="bg-white border-b hover:bg-gray-50 ">
+                        <tr class="bg-white border-b hover:bg-gray-50 ">
 
 
 
-                                <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
-                                    <?php echo htmlentities($row['id']); ?>
-                                </th>
-                                <td class="py-4 px-6">
-                                    <?php echo htmlentities($row['refno']); ?>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <?php echo htmlentities($row['transcationid']); ?>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <?php echo htmlentities($row['amount']); ?>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <?php echo htmlentities($row['mode']); ?>
-                                </td>
+                            <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
+                                <?php echo htmlentities($row['id']); ?>
+                            </th>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['refno']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['transcationid']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['amount']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['mode']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['status']); ?>
+                            </td>
+
+                            <td class="flex items-center py-4 px-6 space-x-3 place-content-center ">
+                                <form method="post" action="">
+                                    <input type="hidden" name="row_id" value="<?= $row['id']; ?>" />
+                                    <button
+                                        class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 "
+                                        type="submit" name="received">Item Received</button>
+                                </form>
+                            </td>
 
 
 
 
 
-
-                            </tr>
+                        </tr>
                         <?php
 
 
@@ -214,28 +246,10 @@ $conn = mysqli_connect('localhost', 'root', '', 'athul9z1_cms');
 
                 </div>
             </div>
-            <script type="text/javascript">
-                $(".remove").click(function() {
-                    var id = $(this).parents("tr").attr("id");
-
-
-                    if (confirm('Are you sure to remove this record ?')) {
-                        $.ajax({
-                            url: '/vendorlist.php',
-                            type: 'GET',
-                            data: {
-                                id: id
-                            },
-                            error: function() {
-                                alert('Something is wrong');
-                            },
-                            success: function(data) {
-                                $("#" + id).remove();
-                                alert("Record removed successfully");
-                            }
-                        });
-                    }
-                });
+            <script>
+            if (window.history.replaceState) {
+                window.history.replaceState(null, null, window.location.href);
+            }
             </script>
 
             <script src="https://unpkg.com/flowbite@1.5.5/dist/flowbite.js"></script>

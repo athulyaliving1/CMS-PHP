@@ -38,6 +38,49 @@ if (isset($_POST['rejected'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+
+
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
+                },
+            },
+            screens: {
+                ss: "320px",
+                // => @media (min-width: 640px) { ... }
+
+                sm: "375px",
+                sl: "425px",
+
+                md: "768px",
+                // => @media (min-width: 768px) { ... }
+
+                lg: "1024px",
+                // => @media (min-width: 1024px) { ... }
+
+                xl: "1280px",
+                // => @media (min-width: 1280px) { ... }
+
+                desktop: "1440px",
+                // => @media (min-width: 1536px) { ... }
+            },
+        },
+        container: {
+            padding: {
+                DEFAULT: "1rem",
+                sm: "2rem",
+                lg: "4rem",
+                xl: "5rem",
+                "2xl": "6rem",
+            },
+        },
+    }
+    </script>
 </head>
 
 
@@ -46,8 +89,8 @@ if (isset($_POST['rejected'])) {
 
     <?php
 
-    include("include/header.php");
-    include("include/sidebar1.php");
+    include("../include/header.php");
+    include("./sidebar1.php");
     ?>
 
     <div class="container mx-auto bg-white  p-16">
@@ -90,7 +133,7 @@ if (isset($_POST['rejected'])) {
                             <th scope="col" class="py-3 px-6">
                                 vendor
                             </th>
-                            <th scope="col" class="col-2  py-3 px-6">
+                            <th scope="col" class="mr-24 col-2  py-3 px-6">
                                 status
                             </th>
 
@@ -209,7 +252,7 @@ if (isset($_POST['rejected'])) {
 
 
 
-                            <td class="py-4">
+                            <td class="py-4 flex space-x-5">
                                 <form method="post" action="">
                                     <input type="hidden" name="row_id" value="<?= $row['id']; ?>" />
                                     <button type="submit" name="approved"
@@ -323,10 +366,10 @@ if (isset($_POST['rejected'])) {
             <script src="https://unpkg.com/flowbite@1.5.5/dist/flowbite.js"></script>
 
             <script>
-    if (window.history.replaceState) {
-        window.history.replaceState(null, null, window.location.href);
-    }
-    </script>
+            if (window.history.replaceState) {
+                window.history.replaceState(null, null, window.location.href);
+            }
+            </script>
 
 </body>
 

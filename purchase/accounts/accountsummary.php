@@ -10,21 +10,6 @@ $conn = mysqli_connect('localhost', 'root', '', 'athul9z1_cms');
 //     echo "Connection successful";
 // }
 
-
-if (isset($_POST['received'])) {
-    $appUpdateQuery = "UPDATE paymentdetails SET status='Item_Received' WHERE id='" . $_POST['row_id'] . "'";
-    $appUpdateResult = mysqli_query($conn, $appUpdateQuery);
-    $appInsertQuery = "INSERT INTO paymentdetails (id,status) VALUES ('" . $_POST['row_id'] . "','Item_Received')";
-    $appInsertResult = mysqli_query($conn, $appInsertQuery);
-}
-
-else{
-
-}
-
-
-
-
 ?>
 
 
@@ -39,15 +24,57 @@ else{
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+
+
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
+                },
+            },
+            screens: {
+                ss: "320px",
+                // => @media (min-width: 640px) { ... }
+
+                sm: "375px",
+                sl: "425px",
+
+                md: "768px",
+                // => @media (min-width: 768px) { ... }
+
+                lg: "1024px",
+                // => @media (min-width: 1024px) { ... }
+
+                xl: "1280px",
+                // => @media (min-width: 1280px) { ... }
+
+                desktop: "1440px",
+                // => @media (min-width: 1536px) { ... }
+            },
+        },
+        container: {
+            padding: {
+                DEFAULT: "1rem",
+                sm: "2rem",
+                lg: "4rem",
+                xl: "5rem",
+                "2xl": "6rem",
+            },
+        },
+    }
+    </script>
 </head>
 
 <body>
     <?php
-
-    include("include/header.php");
-    include("include/sidebar1.php");
+ include("../include/header.php");
+ include("./sidebar1.php");
+  
     ?>
-
     <div class="container mx-auto bg-white  p-16">
         <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
 
@@ -73,12 +100,6 @@ else{
 
                             <th scope="col" class="col-2  py-3 px-6">
                                 Mode
-                            </th>
-                            <th scope="col" class="col-2  py-3 px-6">
-                                Payment
-                            </th>
-                            <th scope="col" class="col-2 py-3 px-6">
-                                Action
                             </th>
 
                         </tr>
@@ -162,18 +183,7 @@ else{
                             <td class="py-4 px-6">
                                 <?php echo htmlentities($row['mode']); ?>
                             </td>
-                            <td class="py-4 px-6">
-                                <?php echo htmlentities($row['status']); ?>
-                            </td>
 
-                            <td class="flex items-center py-4 px-6 space-x-3 place-content-center ">
-                                <form method="post" action="">
-                                    <input type="hidden" name="row_id" value="<?= $row['id']; ?>" />
-                                    <button
-                                        class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 "
-                                        type="submit" name="received">Item Received</button>
-                                </form>
-                            </td>
 
 
 
@@ -246,10 +256,28 @@ else{
 
                 </div>
             </div>
-            <script>
-            if (window.history.replaceState) {
-                window.history.replaceState(null, null, window.location.href);
-            }
+            <script type="text/javascript">
+            $(".remove").click(function() {
+                var id = $(this).parents("tr").attr("id");
+
+
+                if (confirm('Are you sure to remove this record ?')) {
+                    $.ajax({
+                        url: '/vendorlist.php',
+                        type: 'GET',
+                        data: {
+                            id: id
+                        },
+                        error: function() {
+                            alert('Something is wrong');
+                        },
+                        success: function(data) {
+                            $("#" + id).remove();
+                            alert("Record removed successfully");
+                        }
+                    });
+                }
+            });
             </script>
 
             <script src="https://unpkg.com/flowbite@1.5.5/dist/flowbite.js"></script>

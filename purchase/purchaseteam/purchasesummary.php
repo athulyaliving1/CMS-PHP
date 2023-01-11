@@ -35,8 +35,8 @@ $conn = mysqli_connect('localhost', 'root', '', 'athul9z1_cms');
 
     <?php
 
-    include("include/header.php");
-    include("include/sidebar1.php");
+include("./header.php");
+include("./sidebar1.php");
     ?>
 
     <div class="container mx-auto bg-white  p-16">
