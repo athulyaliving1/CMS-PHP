@@ -26,7 +26,7 @@ if (strlen($_SESSION['login']) == "") {
         $vendor = $_POST['vendor'];
         $price = $_POST['price'];
         $department = $_POST['department'];
-        $productdesc = $POST['equipment'];
+        $equipment = $_POST['equipment'];
         $qty = $_POST['qty'];
  
 
@@ -37,7 +37,7 @@ if (strlen($_SESSION['login']) == "") {
         //move_uploaded_file($_FILES["reqfile"]["tmp_name"], "reqdocs/" . $_FILES["reqfile"]["name"]);
         $sql = "INSERT INTO purchaserequest ( `name`,`state`,`location`,`place`,`vendor`,`price`,`department`,`equipment`,`qty`) VALUES 
 
-        ('$name','$state','$location','$place','$vendor','$price','$department','$productdesc','$qty')";
+        ('$name','$state','$location','$place','$vendor','$price','$department','$equipment','$qty')";
 
         // echo $sql;
 
@@ -152,7 +152,7 @@ if (strlen($_SESSION['login']) == "") {
     <div class="container mx-auto bg-white  p-16">
 
         <form action="" method="post">
-            <div class="grid gap-6 mb-6  rounded-2xl">
+            <div class="grid gap-6 mb-6 lg:grid-cols-2 rounded-2xl">
                 <div class="">
                     <div>
                         <label for="fname" class="block mb-2 text-sm font-medium text-gray-900 ">Applicant Name</label>
@@ -295,7 +295,7 @@ if (strlen($_SESSION['login']) == "") {
                         ?>
 
 
-                        <select name="state" required="required" value="<?php'$vendorname'?>">
+                        <select name="state" required="required" value="<?php echo $vendorname; ?>">
 
 
 
@@ -326,10 +326,10 @@ if (strlen($_SESSION['login']) == "") {
 
                 <div>
 
-                    <label for="product" class="block mb-2 text-sm font-medium text-gray-900 ">Product_Description
+                    <label for="equipment" class="block mb-2 text-sm font-medium text-gray-900 ">Product_Description
 
                     </label>
-                    <input type="text" id="product" name="productdesc"
+                    <input type="text" id="equipment" name="equipment"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
                         placeholder="Enter the Product Name" required>
 
@@ -524,6 +524,12 @@ if (strlen($_SESSION['login']) == "") {
     });
     </script>
 
+
+<script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+    </script>
 
 </body>
 

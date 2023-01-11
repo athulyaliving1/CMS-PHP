@@ -10,6 +10,21 @@ $conn = mysqli_connect('localhost', 'root', '', 'athul9z1_cms');
 //     echo "Connection successful";
 // }
 
+
+if (isset($_POST['received'])) {
+    $appUpdateQuery = "UPDATE paymentdetails SET status='Item_Received' WHERE id='" . $_POST['row_id'] . "'";
+    $appUpdateResult = mysqli_query($conn, $appUpdateQuery);
+    $appInsertQuery = "INSERT INTO paymentdetails (id,status) VALUES ('" . $_POST['row_id'] . "','Item_Received')";
+    $appInsertResult = mysqli_query($conn, $appInsertQuery);
+}
+
+else{
+
+}
+
+
+
+
 ?>
 
 
@@ -37,21 +52,7 @@ $conn = mysqli_connect('localhost', 'root', '', 'athul9z1_cms');
         <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
 
             <div>
-                <button id="dropdownRadioButton" data-dropdown-toggle="dropdownRadio"
-                    class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-                    type="button">
-                    <svg class="mr-2 w-4 h-4 text-gray-400" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
-                            clip-rule="evenodd"></path>
-                    </svg>
-                    Last 30 days
-                    <svg class="ml-2 w-3 h-3" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                </button>
+
 
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -72,6 +73,12 @@ $conn = mysqli_connect('localhost', 'root', '', 'athul9z1_cms');
 
                             <th scope="col" class="col-2  py-3 px-6">
                                 Mode
+                            </th>
+                            <th scope="col" class="col-2  py-3 px-6">
+                                Payment
+                            </th>
+                            <th scope="col" class="col-2 py-3 px-6">
+                                Action
                             </th>
 
                         </tr>
@@ -155,7 +162,18 @@ $conn = mysqli_connect('localhost', 'root', '', 'athul9z1_cms');
                             <td class="py-4 px-6">
                                 <?php echo htmlentities($row['mode']); ?>
                             </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['status']); ?>
+                            </td>
 
+                            <td class="flex items-center py-4 px-6 space-x-3 place-content-center ">
+                                <form method="post" action="">
+                                    <input type="hidden" name="row_id" value="<?= $row['id']; ?>" />
+                                    <button
+                                        class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 "
+                                        type="submit" name="received">Item Received</button>
+                                </form>
+                            </td>
 
 
 
@@ -228,28 +246,10 @@ $conn = mysqli_connect('localhost', 'root', '', 'athul9z1_cms');
 
                 </div>
             </div>
-            <script type="text/javascript">
-            $(".remove").click(function() {
-                var id = $(this).parents("tr").attr("id");
-
-
-                if (confirm('Are you sure to remove this record ?')) {
-                    $.ajax({
-                        url: '/vendorlist.php',
-                        type: 'GET',
-                        data: {
-                            id: id
-                        },
-                        error: function() {
-                            alert('Something is wrong');
-                        },
-                        success: function(data) {
-                            $("#" + id).remove();
-                            alert("Record removed successfully");
-                        }
-                    });
-                }
-            });
+            <script>
+            if (window.history.replaceState) {
+                window.history.replaceState(null, null, window.location.href);
+            }
             </script>
 
             <script src="https://unpkg.com/flowbite@1.5.5/dist/flowbite.js"></script>

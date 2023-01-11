@@ -108,7 +108,7 @@ if (isset($_POST['rejected'])) {
 
                         // query to retrieve all rows from the table Countries
 
-                        $getQuery = "SELECT * FROM purchaserequest WHERE status='request'";
+                        $getQuery = "SELECT * FROM purchaserequest WHERE status='request_pending'";
 
 
                         // get the result
@@ -137,7 +137,7 @@ if (isset($_POST['rejected'])) {
 
                         // get data of selected rows per page    
 
-                        $getQuery = "SELECT * FROM purchaserequest WHERE status='request' LIMIT " . $initial_page . ',' . $limit;
+                        $getQuery = "SELECT * FROM purchaserequest WHERE status='request_pending' LIMIT " . $initial_page . ',' . $limit;
 
                         $result = mysqli_query($conn, $getQuery);
 
@@ -159,7 +159,7 @@ if (isset($_POST['rejected'])) {
 
 
                         <?php
-                        $selectQuery = "SELECT * FROM purchaserequest WHERE status='request'";
+                        $selectQuery = "SELECT * FROM purchaserequest WHERE status='request_pending'";
                         $sql = mysqli_query($conn, $selectQuery);
                         $count = mysqli_num_rows($sql);
 
@@ -322,7 +322,11 @@ if (isset($_POST['rejected'])) {
 
             <script src="https://unpkg.com/flowbite@1.5.5/dist/flowbite.js"></script>
 
-
+            <script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+    </script>
 
 </body>
 

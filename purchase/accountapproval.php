@@ -12,9 +12,9 @@ $conn = mysqli_connect('localhost', 'root', '', 'athul9z1_cms');
 
 
 if (isset($_POST['acknowledge'])) {
-    $appUpdateQuery = "UPDATE purchaseorder SET status='acknowledged' WHERE id='" . $_POST['row_id'] . "'";
+    $appUpdateQuery = "UPDATE purchaseorder SET status='accounts_approved' WHERE id='" . $_POST['row_id'] . "'";
     $appUpdateResult = mysqli_query($conn, $appUpdateQuery);
-    $appInsertQuery = "INSERT INTO purchaseorder (id,status) VALUES ('" . $_POST['row_id'] . "','acknowledged')";
+    $appInsertQuery = "INSERT INTO purchaseorder (id,status) VALUES ('" . $_POST['row_id'] . "','accounts_approved')";
     $appInsertResult = mysqli_query($conn, $appInsertQuery);
 }
 
@@ -61,6 +61,21 @@ if (isset($_POST['acknowledge'])) {
 
                             <th scope="col" class="py-3 px-6">
                                 id
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                name
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                deparment
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                eqipment
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                qty
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                price
                             </th>
                             <th scope="col" class="py-3 px-6">
                                 Reference Number
@@ -160,6 +175,23 @@ if (isset($_POST['acknowledge'])) {
                             <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
                                 <?php echo htmlentities($row['id']); ?>
                             </th>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['name']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['department']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['equipment']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['qty']); ?>
+                            </td>
+                            <td class="py-4 px-6">
+                                <?php echo htmlentities($row['price']); ?>
+                            </td>
+
+
                             <td class="py-4 px-6">
                                 <?php echo htmlentities($row['refno']); ?>
                             </td>
@@ -297,6 +329,9 @@ if (isset($_POST['acknowledge'])) {
 
                                                 <form class="mt-5" method="post" action="">
 
+
+
+
                                                     <div>
                                                         <label for="refno"
                                                             class="block text-sm text-gray-700 capitalize dark:text-gray-200 ">Reference
@@ -345,6 +380,7 @@ if (isset($_POST['acknowledge'])) {
                                                 </form>
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
                             </td>
@@ -413,31 +449,11 @@ if (isset($_POST['acknowledge'])) {
 
 
 
-            <script type="text/javascript">
-            $(".remove").click(function() {
-                var id = $(this).parents("tr").attr("id");
-
-
-                if (confirm('Are you sure to remove this record ?')) {
-                    $.ajax({
-                        url: '/vendorlist.php',
-                        type: 'GET',
-                        data: {
-                            id: id
-                        },
-                        error: function() {
-                            alert('Something is wrong');
-                        },
-                        success: function(data) {
-                            $("#" + id).remove();
-                            alert("Record removed successfully");
-                        }
-                    });
-                }
-            });
+            <script>
+            if (window.history.replaceState) {
+                window.history.replaceState(null, null, window.location.href);
+            }
             </script>
-
-            <script src="https://unpkg.com/flowbite@1.5.5/dist/flowbite.js"></script>
 
 
 </body>

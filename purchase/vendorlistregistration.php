@@ -160,7 +160,7 @@ if (strlen($_SESSION['login']) == "") {
 
                 <div class="grid gap-6 mb-6 lg:grid-cols-3 rounded-2xl">
                     <div>
-                        <label for="fname" class="block mb-2 text-sm font-medium text-gray-900 ">Vendor name</label>
+                        <label for="fname" class="block mb-2 text-sm font-medium text-gray-900 ">Vendor Name</label>
                         <input type="text" id="fname" name="vendorname"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
                             placeholder="John" required>
@@ -244,8 +244,7 @@ if (strlen($_SESSION['login']) == "") {
 
                         </label>
                         <select name="department"
-                            class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm
-                                                                                                                rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 ">
+                            class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 ">
                             <option selected>Choose a Department</option>
                             <option value=" Tamil Nadu">
                                 Tamil Nadu</option>
@@ -375,7 +374,11 @@ if (strlen($_SESSION['login']) == "") {
     </div>
 
 
-
+    <script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+    </script>
 
 </body>
 

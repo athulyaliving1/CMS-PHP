@@ -36,7 +36,8 @@ if (isset($_POST['submit'])) {
     <title>CMS | Admin login</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
 
     <script src="sweetalert2.min.js"></script>
@@ -44,43 +45,43 @@ if (isset($_POST['submit'])) {
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                },
-                screens: {
-                    ss: "320px",
-                    // => @media (min-width: 640px) { ... }
-
-                    sm: "375px",
-                    sl: "425px",
-
-                    md: "768px",
-                    // => @media (min-width: 768px) { ... }
-
-                    lg: "1024px",
-                    // => @media (min-width: 1024px) { ... }
-
-                    xl: "1280px",
-                    // => @media (min-width: 1280px) { ... }
-
-                    desktop: "1440px",
-                    // => @media (min-width: 1536px) { ... }
+    tailwind.config = {
+        theme: {
+            extend: {
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
                 },
             },
-            container: {
-                padding: {
-                    DEFAULT: "1rem",
-                    sm: "2rem",
-                    lg: "4rem",
-                    xl: "5rem",
-                    "2xl": "6rem",
-                },
+            screens: {
+                ss: "320px",
+                // => @media (min-width: 640px) { ... }
+
+                sm: "375px",
+                sl: "425px",
+
+                md: "768px",
+                // => @media (min-width: 768px) { ... }
+
+                lg: "1024px",
+                // => @media (min-width: 1024px) { ... }
+
+                xl: "1280px",
+                // => @media (min-width: 1280px) { ... }
+
+                desktop: "1440px",
+                // => @media (min-width: 1536px) { ... }
             },
-        }
+        },
+        container: {
+            padding: {
+                DEFAULT: "1rem",
+                sm: "2rem",
+                lg: "4rem",
+                xl: "5rem",
+                "2xl": "6rem",
+            },
+        },
+    }
     </script>
 
     <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v5.15.1/css/pro.min.css" />
@@ -114,27 +115,38 @@ if (isset($_POST['submit'])) {
                         <label for="email" class="mb-1 text-xs sm:text-sm tracking-wide text-gray-600">Username:
                         </label>
                         <div class="relative">
-                            <div class="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
-                                <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+                            <div
+                                class="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
+                                <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path
+                                        d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
                                 </svg>
                             </div>
 
-                            <input id="inputEmail" type="text" name="username" class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400" placeholder="E-Mail Address" />
+                            <input id="inputEmail" type="text" name="username"
+                                class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
+                                placeholder="E-Mail Address" />
                         </div>
                     </div>
                     <div class="flex flex-col mb-6">
-                        <label for="password" class="mb-1 text-xs sm:text-sm tracking-wide text-gray-600">Password:</label>
+                        <label for="password"
+                            class="mb-1 text-xs sm:text-sm tracking-wide text-gray-600">Password:</label>
                         <div class="relative">
-                            <div class="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
+                            <div
+                                class="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
                                 <span>
-                                    <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                    <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path
+                                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                                     </svg>
                                 </span>
                             </div>
 
-                            <input id="inputPassword" type="password" name="password" class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400" placeholder="Password" />
+                            <input id="inputPassword" type="password" name="password"
+                                class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
+                                placeholder="Password" />
                         </div>
                     </div>
 
@@ -146,10 +158,12 @@ if (isset($_POST['submit'])) {
                     </div>
 
                     <div class="flex w-full">
-                        <button type="submit" name="submit" class="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-sky-800 hover:bg-sky-800 rounded py-2 w-full transition duration-150 ease-in">
+                        <button type="submit" name="submit"
+                            class="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-sky-800 hover:bg-sky-800 rounded py-2 w-full transition duration-150 ease-in">
                             <span class="mr-2 uppercase">Login</span>
                             <span>
-                                <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                                     <path d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                             </span>
@@ -158,10 +172,13 @@ if (isset($_POST['submit'])) {
                 </form>
             </div>
             <div class="flex justify-center items-center mt-6">
-                <a href="#" target="_blank" class="inline-flex items-center font-bold text-blue-500 hover:text-blue-700 text-xs text-center">
+                <a href="#" target="_blank"
+                    class="inline-flex items-center font-bold text-blue-500 hover:text-blue-700 text-xs text-center">
                     <span>
-                        <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                            <path d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                        <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path
+                                d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
                         </svg>
                     </span>
                     <span class="ml-2">You don't have an account?</span>
@@ -169,7 +186,8 @@ if (isset($_POST['submit'])) {
             </div>
         </div>
         <footer class="px-4 py-8 ">
-            <div class="container flex flex-wrap items-center justify-center mx-auto space-y-4 sm:justify-between sm:space-y-0">
+            <div
+                class="container flex flex-wrap items-center justify-center mx-auto space-y-4 sm:justify-between sm:space-y-0">
 
                 <ul class="flex flex-wrap pl-3 space-x-4 sm:space-x-8">
                     <li class="text-pink-500 font-semibold ">

@@ -4,16 +4,11 @@ error_reporting(1);
 include('includes/config.php');
 $conn = mysqli_connect('localhost', 'root', '', 'athul9z1_cms');
 // Check connection
-// if (!$conn) {
-//     die("Connection failed: " . mysqli_connect_error());
-// } else {
-//     echo "Connection successful";
-// }
-
-
-
-
-
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+} else {
+    echo "Connection successful";
+}
 
 
 ?>
@@ -24,9 +19,8 @@ $conn = mysqli_connect('localhost', 'root', '', 'athul9z1_cms');
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Document</title>
 </head>
 
 
@@ -93,12 +87,62 @@ $conn = mysqli_connect('localhost', 'root', '', 'athul9z1_cms');
                     <tbody>
                         <?php
 
+                        $limit = 10;
+
+                        // query to retrieve all rows from the table Countries
+
+                        $getQuery = "SELECT * FROM purchaserequest";
+
+
+                        // get the result
+
+                        $result = mysqli_query($conn, $getQuery);
+
+                        $total_rows = mysqli_num_rows($result);
+
+                        // get the required number of pages
+
+                        $total_pages = ceil($total_rows / $limit);
+
+                        // update the active page number
+
+                        if (!isset($_GET['page'])) {
+
+                            $page_number = 1;
+                        } else {
+
+                            $page_number = $_GET['page'];
+                        }
+
+                        // get the initial page number
+
+                        $initial_page = ($page_number - 1) * $limit;
+
+                        // get data of selected rows per page    
+
+                        $getQuery = "SELECT * FROM purchaserequest LIMIT " . $initial_page . ',' . $limit;
+
+                        $result = mysqli_query($conn, $getQuery);
+
+                        //display the retrieved result on the webpage  
+
+
+
+
+
+
+
+                        while ($row = mysqli_fetch_array($result)) {
+
+
+                            // echo $row['id'] . ' ' . $row['vendorname'] . '</br>';
+                        }
 
                         ?>
 
 
                         <?php
-                        $selectQuery = "SELECT * FROM purchaserequest ";
+                        $selectQuery = "SELECT * FROM purchaserequest";
                         $sql = mysqli_query($conn, $selectQuery);
                         $count = mysqli_num_rows($sql);
 
@@ -116,8 +160,7 @@ $conn = mysqli_connect('localhost', 'root', '', 'athul9z1_cms');
 
 
                             <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
-                                <?php echo htmlentities($row['id']);
-                                $kk = $row['id'];?>
+                                <?php echo htmlentities($row['id']); ?>
                             </th>
                             <td class="py-4 px-6">
                                 <?php echo htmlentities($row['name']); ?>
@@ -187,8 +230,8 @@ $conn = mysqli_connect('localhost', 'root', '', 'athul9z1_cms');
                                                     x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                                                     class="inline-block w-full max-w-xl p-8 my-20 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl 2xl:max-w-2xl">
                                                     <div class="flex items-center justify-between space-x-4">
-                                                        <h1 class="text-xl font-medium text-gray-800 ">Purchase Order
-                                                            Summary</h1>
+                                                        <h1 class="text-xl font-medium text-gray-800 ">Invite team
+                                                            memebr</h1>
 
                                                         <button @click="modelOpen = false"
                                                             class="text-gray-600 focus:outline-none hover:text-gray-700">
@@ -202,8 +245,7 @@ $conn = mysqli_connect('localhost', 'root', '', 'athul9z1_cms');
                                                     </div>
 
                                                     <p class="mt-2 text-sm text-gray-500 ">
-                                                        Vestibulum ac diam sit amet quam vehicula elementum sed sit amet
-                                                        dui.
+                                                        Add your teammate to your team and start work to get things done
                                                     </p>
                                                     <section class="text-gray-600 body-font">
                                                         <div class="container px-5 py-24 mx-auto flex flex-wrap">
@@ -227,10 +269,27 @@ $conn = mysqli_connect('localhost', 'root', '', 'athul9z1_cms');
                                                                             Purchase Request</h2>
 
 
+                                                                        <?php 
+                                                                          $dummyid = $_GET['id'];
+                                                                          $dd = $row['id'];
+                                                                              
+                                                                          $sql = mysqli_query($conn, "select * from purchaserequest where id ='$row[id]'");
+
+
+                                                                            while ($rw = mysqli_fetch_assoc($sql)) {
+                                                                             ?>
+
+
+                                                                        <?php echo $rw['created_at']; ?>
+
+
+                                                                        <?php
+                                                                      }
+                                                                      ?>
 
 
                                                                         <p class="leading-relaxed">
-                                                                            <?php echo $row['created_at'];  ?>
+                                                                            <?php echo $rw['created_at'];  ?>
                                                                         </p>
                                                                     </div>
                                                                 </div>
@@ -257,18 +316,28 @@ $conn = mysqli_connect('localhost', 'root', '', 'athul9z1_cms');
                                                                     <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
                                                                         <h2
                                                                             class="font-medium title-font text-gray-900 mb-1 text-xl">
-                                                                            Admin Action</h2>
+                                                                            Admin Approval</h2>
 
 
+                                                                        <?php 
+                                                                          $dummyid = $_GET['id'];
+                                                                          $dd = $row['id'];
+                                                                              
+                                                                          $sql = mysqli_query($conn, "select * from purchaserequest where id ='$row[id]'");
 
-                                                                        <p class="leading-relaxed">
-                                                                            <?php echo $row['status'];  ?>
+
+                                                                            while ($rw = mysqli_fetch_assoc($sql)) {
+                                                                             ?>
 
 
-                                                                        </p>
-                                                                        <p class="leading-relaxed">
-                                                                            <?php echo $row['updated_at'];  ?>
-                                                                        </p>
+                                                                        <?php echo $rw['updated_at']; ?>
+
+
+                                                                        <?php
+                                                                      }
+                                                                      ?>
+
+
 
 
 
@@ -294,27 +363,10 @@ $conn = mysqli_connect('localhost', 'root', '', 'athul9z1_cms');
                                                                         <h2
                                                                             class="font-medium title-font text-gray-900 mb-1 text-xl">
                                                                             P.O Created</h2>
-                                                                        <?php
-
-                                                                           $rrid = $_GET["id"];
-
-                                                                         
-
-
-                                                                        
-                                                                        $datasql = mysqli_query($conn, "SELECT  po.id,po.created_at_po as po_created,po.updated_at_po as payment_date,po.status as status FROM purchaserequest pr join purchaseorder po on pr.id=po.id  where po.id=".$kk.";");
-
-                                                                            $rw = mysqli_fetch_assoc($datasql);
-
-                                                                          
-                                                                         ?>
-
-                                                                        <p class="leading-relaxed">
-
-
-                                                                            <?php echo $rw['po_created']; ?>
+                                                                        <p class="leading-relaxed">VHS cornhole pop-up,
+                                                                            try-hard 8-bit iceland helvetica. Kinfolk
+                                                                            bespoke try-hard cliche palo santo offal.
                                                                         </p>
-
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -335,94 +387,14 @@ $conn = mysqli_connect('localhost', 'root', '', 'athul9z1_cms');
                                                                     <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
                                                                         <h2
                                                                             class="font-medium title-font text-gray-900 mb-1 text-xl">
-                                                                            Account Acknowledge</h2>
-                                                                        <p class="leading-relaxed">
-                                                                            <?php    echo $rw['status'];?>
-                                                                            
-                                                                        </p>
-                                                                        <p class="leading-relaxed">
-                                                                        <?php   echo $rw['payment_date']; ?>
-                                                                            
+                                                                            Payment Action</h2>
+                                                                        <p class="leading-relaxed">VHS cornhole pop-up,
+                                                                            try-hard 8-bit iceland helvetica. Kinfolk
+                                                                            bespoke try-hard cliche palo santo offal.
                                                                         </p>
                                                                     </div>
                                                                 </div>
                                                             </div>
-
-
-                                                            <?php
-
-                                                                   $rrid = $_GET["id"];
-
-                                                             $datamysql = mysqli_query($conn, "SELECT paymentdetails.id, purchaseorder.id, paymentdetails.created_at,paymentdetails.updated_at,paymentdetails.status FROM paymentdetails INNER JOIN purchaseorder ON paymentdetails.id=purchaseorder.id  where paymentdetails.id=".$kk."; ");
-
-                                                              $rw1 = mysqli_fetch_array($datamysql);
-                                                        
-
-?>
-
-                                                            <div
-                                                                class="flex relative pb-10 sm:items-center md:w-2/3 mx-auto">
-                                                                <div
-                                                                    class="h-full w-6 absolute inset-0 flex items-center justify-center">
-                                                                    <div
-                                                                        class="h-full w-1 bg-gray-200 pointer-events-none">
-                                                                    </div>
-                                                                </div>
-                                                                <div
-                                                                    class="flex-shrink-0 w-6 h-6 rounded-full mt-10 sm:mt-0 inline-flex items-center justify-center bg-indigo-500 text-white relative z-10 title-font font-medium text-sm">
-                                                                    5</div>
-                                                                <div
-                                                                    class="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
-
-                                                                    <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
-                                                                        <h2
-                                                                            class="font-medium title-font text-gray-900 mb-1 text-xl">
-                                                                            Payment Transfered</h2>
-                                                                    
-                                                                        <p class="leading-relaxed">
-                                                                            <?php echo   $rw1['created_at']; ?>
-
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div
-                                                                class="flex relative pb-10 sm:items-center md:w-2/3 mx-auto">
-                                                                <div
-                                                                    class="h-full w-6 absolute inset-0 flex items-center justify-center">
-                                                                    <div
-                                                                        class="h-full w-1 bg-gray-200 pointer-events-none">
-                                                                    </div>
-                                                                </div>
-                                                                <div
-                                                                    class="flex-shrink-0 w-6 h-6 rounded-full mt-10 sm:mt-0 inline-flex items-center justify-center bg-indigo-500 text-white relative z-10 title-font font-medium text-sm">
-                                                                    6</div>
-                                                                <div
-                                                                    class="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
-
-                                                                    <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
-                                                                        <h2
-                                                                            class="font-medium title-font text-gray-900 mb-1 text-xl">
-                                                                            Items Recevied</h2>
-                                                                        <p class="leading-relaxed">
-
-                                                                            <?php echo   $rw1['status']; ?>
-
-                                                                        </p>
-
-                                                                        <p class="leading-relaxed">
-
-
-                                                                            <?php echo   $rw1['updated_at']; ?>
-                                                                        </p>
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-
-
-
                                                         </div>
                                                     </section>
 
@@ -450,7 +422,21 @@ $conn = mysqli_connect('localhost', 'root', '', 'athul9z1_cms');
 
                     <div class="flex justify-center">
                         <div class="flex items-center space-x-5">
+                            <?php
+                            // show page number with link   
 
+
+
+
+
+                            for ($page_number = 1; $page_number <= $total_pages; $page_number++) {
+
+                                echo '<a href = "purchasesummary.php?page=' . $page_number . '">' . $page_number . ' </a>';
+                            }
+
+
+
+                            ?>
                         </div>
 
                     </div>

@@ -20,7 +20,12 @@ if (strlen($_SESSION['login']) == "") {
         // $uid = $_SESSION['id'];
         $tempid = $_GET['id'];
         $userid = $_POST['id'];
-
+        $name = $_POST['name'];
+        $department = $_POST['department'];
+        $equipment = $_POST['equipment'];
+        $qty = $_POST['qty'];
+        
+        $price = $_POST['price'];
         $refno = $_POST['refno'];
         $paymentterms = $_POST['paymentterms'];
         $compfile = $_FILES["compfile"]["name"];
@@ -30,7 +35,7 @@ if (strlen($_SESSION['login']) == "") {
         $reqfile = $_FILES["reqfile"]["name"];
 
         move_uploaded_file($_FILES["reqfile"]["tmp_name"], "reqdocs/" . $_FILES["reqfile"]["name"]);
-        $sql =  "insert into purchaseorder(id,refno,paymentterms,compfile) values('$tempid','$refno','$paymentterms','$compfile')";
+        $sql =  "insert into purchaseorder(id,name,department,equipment,qty,price,refno,paymentterms,compfile) values('$tempid','$name','$department','$equipment','$qty','$price','$refno','$paymentterms','$compfile')";
         // echo $sql;
         // echo $tempid;
 
@@ -46,6 +51,9 @@ if (strlen($_SESSION['login']) == "") {
 
         //echo "INSERT INTO vendorlist (`userId`,`vendorname`,`contactperson `,`gstnumber`,`pannumber`,`email`,`accountnumber`, `ifsccode `,`address` , `department`,`state, `place `) VALUES ('$uid','$vendorname','$contactperson','$gstnumber`,'$pannumber','$email','$accountnumber','$ifsccode ','$address','$department','$state ','$place')";
     }
+
+    
+  
 }
 ?>
 
@@ -141,6 +149,15 @@ if (strlen($_SESSION['login']) == "") {
     ?>
     <div class="container mx-auto bg-white  p-16">
 
+
+        <?php
+ 
+ $result = mysqli_query($con,"SELECT * FROM  purchaserequest WHERE id='" . $_GET['id'] . "'");
+    $rw= mysqli_fetch_array($result);
+
+?>
+
+
         <form action="" method="post" enctype="multipart/form-data">
             <div class="grid gap-6 mb-6 lg:grid-cols-4 rounded-2xl">
                 <div>
@@ -150,6 +167,70 @@ if (strlen($_SESSION['login']) == "") {
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
                         disabled placeholder="John" required>
                 </div>
+                <div>
+
+                    <label for="department" class="block mb-2 text-sm font-medium text-gray-900 ">Deparment Name
+                    </label>
+                    <input type="text" id="department" name="department" value="<?php echo $rw['department']; ?>"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
+                        placeholder="Enter the Deparment Name" required readonly="readonly">
+                </div>
+            </div>
+
+
+
+            <div class="grid gap-6 mb-6 lg:grid-cols-2 rounded-2xl">
+
+
+                <div>
+                    <label for="fname" class="block mb-2 text-sm font-medium text-gray-900 ">Applicant Name</label>
+                    <input type="text" id="fname" name="name" value="<?php echo $rw['name']; ?>"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
+                        placeholder="John" required readonly="readonly">
+
+
+                </div>
+
+                <div>
+
+                    <label for="equipment" class="block mb-2 text-sm font-medium text-gray-900 ">Product_Description
+
+                    </label>
+                    <input type="text" id="equipment" name="equipment" value="<?php echo $rw['equipment']; ?>"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
+                        placeholder="Enter the Product Name" required readonly="readonly">
+
+
+                </div>
+                <div>
+                    <label for="qty" class="block mb-2 text-sm font-medium text-gray-900 ">Qty
+                    </label>
+
+                    <?php $qts=$rw['qty'];?>
+                    <input type="number" id="qty" name="qty" value="<?php echo $qts; ?>"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
+                        placeholder="123-45-678" required readonly="readonly">
+                </div>
+                <div>
+
+                    <label for="price" class="block mb-2 text-sm font-medium text-gray-900 ">Price
+                    </label>
+                    <input type="number" id="price" name="price" value="<?php echo $rw['price']; ?>"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 "
+                        placeholder="Enter the Price Of product/s" required readonly="readonly">
+
+
+                </div>
+
+
+
+
+
+            </div>
+
+
+
+            <div class="grid gap-6 mb-6 lg:grid-cols-2 rounded-2xl">
 
                 <div>
                     <label for="refnumber" class="block mb-2 text-sm font-medium text-gray-900 ">Reference
@@ -179,15 +260,16 @@ if (strlen($_SESSION['login']) == "") {
 
 
 
-                <div class="grid gap-4 place-content-center">
-                    <button type="submit"
-                        class="text-white bg-pink-500 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "
-                        name="submit">Save</button>
-
-                </div>
-
             </div>
 
+
+
+            <div class="grid gap-4 place-content-center">
+                <button type="submit"
+                    class="text-white bg-pink-500 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center "
+                    name="submit">Save</button>
+
+            </div>
 
         </form>
 
@@ -195,7 +277,11 @@ if (strlen($_SESSION['login']) == "") {
     </div>
 
 
-
+    <script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+    </script>
 
 
 </body>
