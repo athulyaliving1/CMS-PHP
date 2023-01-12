@@ -92,17 +92,12 @@ if (isset($_POST['rejected'])) {
     include("../include/header.php");
     include("./sidebar1.php");
     ?>
-
     <div class="container mx-auto bg-white  p-16">
         <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
-
             <div>
-
-
-                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+               <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
-
                             <th scope="col" class="py-3 px-6">
                                 id
                             </th>
@@ -136,7 +131,6 @@ if (isset($_POST['rejected'])) {
                             <th scope="col" class="mr-24 col-2  py-3 px-6">
                                 status
                             </th>
-
                         </tr>
                     </thead>
 
@@ -146,61 +140,31 @@ if (isset($_POST['rejected'])) {
 
                     <tbody>
                         <?php
-
                         $limit = 5;
-
                         // query to retrieve all rows from the table Countries
-
-                        $getQuery = "SELECT * FROM purchaserequest WHERE status='request_pending'";
-
-
+                    $getQuery = "SELECT * FROM purchaserequest WHERE status='request_pending'";
                         // get the result
-
                         $result = mysqli_query($conn, $getQuery);
-
                         $total_rows = mysqli_num_rows($result);
-
                         // get the required number of pages
-
                         $total_pages = ceil($total_rows / $limit);
-
                         // update the active page number
-
                         if (!isset($_GET['page'])) {
-
                             $page_number = 1;
                         } else {
-
                             $page_number = $_GET['page'];
                         }
-
                         // get the initial page number
-
                         $initial_page = ($page_number - 1) * $limit;
-
                         // get data of selected rows per page    
-
                         $getQuery = "SELECT * FROM purchaserequest WHERE status='request_pending' LIMIT " . $initial_page . ',' . $limit;
-
                         $result = mysqli_query($conn, $getQuery);
-
-                        //display the retrieved result on the webpage  
-
-
-
-
-
-
+                        //display the retrieved result on the webpage 
 
                         while ($row = mysqli_fetch_array($result)) {
-
-
                             // echo $row['id'] . ' ' . $row['vendorname'] . '</br>';
                         }
-
                         ?>
-
-
                         <?php
                         $selectQuery = "SELECT * FROM purchaserequest WHERE status='request_pending'";
                         $sql = mysqli_query($conn, $selectQuery);
@@ -210,15 +174,7 @@ if (isset($_POST['rejected'])) {
                             while ($row = mysqli_fetch_array($sql)) {
                         ?>
                         <tr>
-
-
-
-
-
                         <tr class="bg-white border-b hover:bg-gray-50 ">
-
-
-
                             <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
                                 <?php echo htmlentities($row['id']); ?>
                             </th>
@@ -249,9 +205,6 @@ if (isset($_POST['rejected'])) {
                             <td class="py-4 px-6">
                                 <?php echo htmlentities($row['vendor']); ?>
                             </td>
-
-
-
                             <td class="py-4 flex space-x-5">
                                 <form method="post" action="">
                                     <input type="hidden" name="row_id" value="<?= $row['id']; ?>" />
@@ -259,12 +212,8 @@ if (isset($_POST['rejected'])) {
                                         class="inline-flex items-center justify-center px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-green-600 border border-green-500 rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                                         Approve
                                     </button>
-
-
                                 </form>
                                 <form method="post" action="">
-
-
                                     <input type="hidden" name="row_id" value="<?= $row['id']; ?>" />
                                     <button
                                         class="inline-flex items-center justify-center px-6 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-red-500 border border-red-500 rounded-md shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
@@ -278,39 +227,19 @@ if (isset($_POST['rejected'])) {
                             echo "No Record";
                         }
                         ?>
-
                     </tbody>
-
-
                 </table>
-
                 <div>
-
                     <div class="flex justify-center">
                         <div class="flex items-center space-x-5">
                             <?php
                             // show page number with link   
-
-
-
-
-
                             for ($page_number = 1; $page_number <= $total_pages; $page_number++) {
-
                                 echo '<a href = "adminapproval.php?page=' . $page_number . '">' . $page_number . ' </a>';
                             }
-
-
-
                             ?>
                         </div>
-
                     </div>
-
-
-
-
-
                     <!-- <div class="flex justify-center">
                 <nav aria-label="Page navigation example">
                     
@@ -333,17 +262,11 @@ if (isset($_POST['rejected'])) {
                     </ul>
                 </nav>
             </div> -->
-
-
-
-
                 </div>
             </div>
             <script type="text/javascript">
             $(".remove").click(function() {
                 var id = $(this).parents("tr").attr("id");
-
-
                 if (confirm('Are you sure to remove this record ?')) {
                     $.ajax({
                         url: '/vendorlist.php',
@@ -362,15 +285,12 @@ if (isset($_POST['rejected'])) {
                 }
             });
             </script>
-
             <script src="https://unpkg.com/flowbite@1.5.5/dist/flowbite.js"></script>
-
             <script>
             if (window.history.replaceState) {
                 window.history.replaceState(null, null, window.location.href);
             }
             </script>
-
 </body>
 
 </html>

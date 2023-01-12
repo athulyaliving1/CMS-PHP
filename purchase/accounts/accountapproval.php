@@ -119,29 +119,18 @@ if (isset($_POST['acknowledge'])) {
                             <th scope="col" class="py-3 px-6">
                                 Payment terms
                             </th>
-
                             <th scope="col" class="col-2  py-3 px-6">
                                 File name
-
                             </th>
-
                             <th scope="col" class="col-2  py-3 px-6">
                                 P.O Status
-
                             </th>
                             <th scope="col" class="col-2  py-3 px-6">
                                 Action
-
                             </th>
                             <th scope="col" class="col-2  py-3 px-6">
                                 Paytment Action
-
                             </th>
-
-
-
-
-
                         </tr>
                     </thead>
 
@@ -151,63 +140,33 @@ if (isset($_POST['acknowledge'])) {
 
                     <tbody>
                         <?php
-
                         $limit = 5;
-
                         // query to retrieve all rows from the table Countries
-
                         $getQuery = "SELECT * FROM purchaseorder ";
-
-
                         // get the result
-
                         $result = mysqli_query($conn, $getQuery);
-
                         $total_rows = mysqli_num_rows($result);
-
                         // get the required number of pages
-
                         $total_pages = ceil($total_rows / $limit);
-
                         // update the active page number
-
                         if (!isset($_GET['page'])) {
-
                             $page_number = 1;
                         } else {
-
                             $page_number = $_GET['page'];
                         }
-
                         // get the initial page number
-
                         $initial_page = ($page_number - 1) * $limit;
-
                         // get data of selected rows per page    
-
                         $getQuery = "SELECT * FROM purchaseorder LIMIT  " . $initial_page . ',' . $limit;
-
                         $result = mysqli_query($conn, $getQuery);
-
                         //display the retrieved result on the webpage  
-
-
-
-
-
-
 
                         while ($row = mysqli_fetch_array($result)) {
 
                             // echo $row['id'] . ' ' . $row['vendorname'] . '</br>';
-
-
                         ?>
 
                         <tr class="bg-white border-b hover:bg-gray-50 ">
-
-
-
                             <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
                                 <?php echo htmlentities($row['id']); ?>
                             </th>
@@ -226,8 +185,6 @@ if (isset($_POST['acknowledge'])) {
                             <td class="py-4 px-6">
                                 <?php echo htmlentities($row['price']); ?>
                             </td>
-
-
                             <td class="py-4 px-6">
                                 <?php echo htmlentities($row['refno']); ?>
                             </td>
@@ -240,12 +197,7 @@ if (isset($_POST['acknowledge'])) {
                             <td class="py-4 px-6">
                                 <?php echo htmlentities($row['status']); ?>
                             </td>
-
-
-
-
                             <td class="flex items-center py-4 px-6 space-x-3 place-content-center ">
-
                                 <form method="post" action="">
                                     <input type="hidden" name="row_id" value="<?= $row['id']; ?>" />
                                     <button
@@ -253,11 +205,8 @@ if (isset($_POST['acknowledge'])) {
                                         type="submit" name="acknowledge">Acknowledge</button>
                                 </form>
                             </td>
-
                             <td>
                                 <div x-data="{ modelOpen: false }">
-
-
                                     <button href="accountapproval.php?refno=<?php echo $row['refno']; ?>   "
                                         @click="modelOpen =!modelOpen  "
                                         class="flex items-center justify-center px-3 py-2 space-x-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md  hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
@@ -268,7 +217,6 @@ if (isset($_POST['acknowledge'])) {
                                                 clip-rule="evenodd" />
                                         </svg>
                                         Add Payment Details
-
                                     </button>
 
                                     <div x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto"
@@ -296,7 +244,6 @@ if (isset($_POST['acknowledge'])) {
                                                 <div class="flex items-center justify-between space-x-4">
                                                     <h1 class="text-xl font-medium text-gray-800 ">Enter The Payment
                                                         Details</h1>
-
                                                     <button @click="modelOpen = false"
                                                         class="text-gray-600 focus:outline-none hover:text-gray-700">
                                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6"
@@ -333,22 +280,9 @@ if (isset($_POST['acknowledge'])) {
                                                             $transcationid = $_POST['transcationid'];
                                                             $amount = $_POST['amount'];
                                                             $mode = $_POST['mode'];
-
-
-                                         
-
                                                             $sql = "INSERT INTO paymentdetails (`refno`,`transcationid`,`amount`,`mode`) VALUES 
-
-                                                             ( '$dd','$transcationid','$amount','$mode')";
-
-
-                                                              
-                                                        
-
-                                                            if (mysqli_query($conn, $sql)) {
-
-                                                           
-
+                                                             ( '$dd','$transcationid','$amount','$mode')";                                                                                                                 
+                                                            if (mysqli_query($conn, $sql)) {                                                           
                                                                 echo '<script>alert("New record created successfully")</script>';
                                                             die(1);
                                                                 // echo "New record created successfully";
@@ -357,17 +291,12 @@ if (isset($_POST['acknowledge'])) {
                                                             }
                                                         }
                                                     }
-
                                                     ?>
 
 
 
 
                                                 <form class="mt-5" method="post" action="">
-
-
-
-
                                                     <div>
                                                         <label for="refno"
                                                             class="block text-sm text-gray-700 capitalize dark:text-gray-200 ">Reference
@@ -378,7 +307,6 @@ if (isset($_POST['acknowledge'])) {
                                                             class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40 ">
                                                     </div>
 
-
                                                     <div>
                                                         <label for="trno"
                                                             class="block text-sm text-gray-700 capitalize dark:text-gray-200">Transcation
@@ -388,6 +316,7 @@ if (isset($_POST['acknowledge'])) {
                                                             type="text"
                                                             class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
                                                     </div>
+
                                                     <div>
                                                         <label for="amount"
                                                             class="block text-sm text-gray-700 capitalize dark:text-gray-200">Amount</label>
@@ -405,8 +334,6 @@ if (isset($_POST['acknowledge'])) {
                                                             class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
                                                     </div>
 
-
-
                                                     <div class="flex justify-end mt-6">
                                                         <button type="sumbit" name="paymentsubmit"
                                                             class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-pink-500 rounded-md  focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
@@ -420,19 +347,10 @@ if (isset($_POST['acknowledge'])) {
                                     </div>
                                 </div>
                             </td>
-
-
-
                         </tr>
                         <?php
-
-
-
                         } ?>
-
                     </tbody>
-
-
                 </table>
 
                 <div>
@@ -442,48 +360,13 @@ if (isset($_POST['acknowledge'])) {
                             <?php
                             // show page number with link   
                             for ($page_number = 1; $page_number <= $total_pages; $page_number++) {
-
                                 echo '<a href = "accountapproval.php?page=' . $page_number . '">' . $page_number . ' </a>';
                             }
                             ?>
                         </div>
-
                     </div>
-
-
-
-
-
-                    <!-- <div class="flex justify-center">
-                <nav aria-label="Page navigation example">
-                    
-                    <ul class="flex list-style-none">
-                        <li class="page-item disabled"><a
-                                class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-500 pointer-events-none focus:shadow-none"
-                                href="#" tabindex="-1" aria-disabled="true">Previous</a></li>
-                        <li class="page-item"><a
-                                class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                                href="#">1</a></li>
-                        <li class="page-item active"><a
-                                class="page-link relative block py-1.5 px-3 rounded border-0 bg-blue-600 outline-none transition-all duration-300 rounded text-white hover:text-white hover:bg-blue-600 shadow-md focus:shadow-md"
-                                href="#">2 <span class="visually-hidden">(current)</span></a></li>
-                        <li class="page-item"><a
-                                class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                                href="#">3</a></li>
-                        <li class="page-item"><a
-                                class="page-link relative block py-1.5 px-3 rounded border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                                href="#"> </a></li>
-                    </ul>
-                </nav>
-            </div> -->
-
-
-
-
                 </div>
             </div>
-
-
 
             <script>
             if (window.history.replaceState) {
